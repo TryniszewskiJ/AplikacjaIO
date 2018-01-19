@@ -66,7 +66,7 @@ namespace DataServiceLayer.Service
                         Sklad = null
                     });
                 }
-                return toList();
+                return toList;
             }
         }
 
