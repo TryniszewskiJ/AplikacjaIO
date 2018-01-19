@@ -9,6 +9,17 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    @if(User.Identity.IsAuthenticated)//tu moze byc navbar dla zalogowanego
+    {
+        if(((System.Security.Claims.ClaimsPrincipal)User).FindFirst(System.Security.Claims.ClaimTypes.Role).Value == "Kasjer")
+        {
+            //elementy dla kasjera w navbarze
+        }
+        else
+        {
+            //Elementy dla kierownika w navbarze
+        }
+    }
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
