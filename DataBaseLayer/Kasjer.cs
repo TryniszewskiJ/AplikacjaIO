@@ -17,9 +17,7 @@ namespace DataBaseLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Kasjer()
         {
-            this.ObslugaRachunkus = new HashSet<ObslugaRachunku>();
-            this.ObslugaRaportows = new HashSet<ObslugaRaportow>();
-            this.Promocjas = new HashSet<Promocja>();
+            this.Rachunkis = new HashSet<Rachunki>();
         }
     
         public string imie { get; set; }
@@ -29,10 +27,6 @@ namespace DataBaseLayer
         public string Login { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ObslugaRachunku> ObslugaRachunkus { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ObslugaRaportow> ObslugaRaportows { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Promocja> Promocjas { get; set; }
+        public virtual ICollection<Rachunki> Rachunkis { get; set; }
     }
 }

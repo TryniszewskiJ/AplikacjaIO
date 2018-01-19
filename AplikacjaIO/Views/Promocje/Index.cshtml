@@ -16,6 +16,9 @@
             @Html.LabelFor(model => model.FirstOrDefault().DataWdrozenia)
         </td>
         <td>
+            @Html.LabelFor(model => model.FirstOrDefault().NazwaKierownika)
+        </td>
+        <td>
 
         </td>
     </tr>
@@ -30,6 +33,9 @@
             </td>
             <td>
                 @Html.EditorFor(model => model[i].DataWdrozenia)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model[i].NazwaKierownika)
             </td>
             <td>
                 Button do edycji tutaj ewentulanie usuniecia 

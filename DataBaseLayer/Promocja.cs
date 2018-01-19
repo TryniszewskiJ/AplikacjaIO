@@ -14,15 +14,12 @@ namespace DataBaseLayer
     
     public partial class Promocja
     {
-        public Nullable<int> id_promocji { get; set; }
         public string nazwaPromocji { get; set; }
         public string opisPromocji { get; set; }
         public int promocjaID { get; set; }
-        public Nullable<int> kasjerID { get; set; }
         public Nullable<int> kierownikID { get; set; }
         public System.DateTime DataWdrozenia { get; set; }
     
-        public virtual Kasjer Kasjer { get; set; }
         public virtual Kierownik Kierownik { get; set; }
     }
 }

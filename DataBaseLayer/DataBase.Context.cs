@@ -27,8 +27,8 @@ namespace DataBaseLayer
     
         public virtual DbSet<Kasjer> Kasjers { get; set; }
         public virtual DbSet<Kierownik> Kierowniks { get; set; }
-        public virtual DbSet<ObslugaRachunku> ObslugaRachunkus { get; set; }
-        public virtual DbSet<ObslugaRaportow> ObslugaRaportows { get; set; }
+        public virtual DbSet<PozycjeNaRachunku> PozycjeNaRachunkus { get; set; }
         public virtual DbSet<Promocja> Promocjas { get; set; }
+        public virtual DbSet<Rachunki> Rachunkis { get; set; }
     }
 }

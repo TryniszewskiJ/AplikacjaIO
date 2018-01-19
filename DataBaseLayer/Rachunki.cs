@@ -12,14 +12,21 @@ namespace DataBaseLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class ObslugaRachunku
+    public partial class Rachunki
     {
-        public Nullable<int> id_rachunku { get; set; }
-        public string skladRachunku { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Rachunki()
+        {
+            this.PozycjeNaRachunkus = new HashSet<PozycjeNaRachunku>();
+        }
+    
+        public int IdRachunku { get; set; }
         public Nullable<double> wysokoscRachunku { get; set; }
-        public int obslugaRachunkuID { get; set; }
         public Nullable<int> kasjerID { get; set; }
+        public Nullable<System.DateTime> DataRachunku { get; set; }
     
         public virtual Kasjer Kasjer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PozycjeNaRachunku> PozycjeNaRachunkus { get; set; }
     }
 }

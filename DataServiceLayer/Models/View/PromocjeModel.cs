@@ -21,5 +21,8 @@ namespace DataServiceLayer.Models.View
         [DataType(DataType.DateTime)]
         [Required(ErrorMessage = "Pole wymagane")]
         public DateTime DataWdrozenia { get; set; }
+        [Display(Name = "Kto utworzył")]
+        public string NazwaKierownika { get; set; }
+        public int IdKierownika { get; set; }
     }
 }

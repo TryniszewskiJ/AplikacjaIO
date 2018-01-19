@@ -17,7 +17,6 @@ namespace DataBaseLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Kierownik()
         {
-            this.ObslugaRaportows = new HashSet<ObslugaRaportow>();
             this.Promocjas = new HashSet<Promocja>();
         }
     
@@ -27,8 +26,6 @@ namespace DataBaseLayer
         public int kierownikID { get; set; }
         public string Login { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ObslugaRaportow> ObslugaRaportows { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Promocja> Promocjas { get; set; }
     }

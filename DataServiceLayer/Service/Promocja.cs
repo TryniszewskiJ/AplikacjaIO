@@ -68,11 +68,14 @@ namespace DataServiceLayer.Service
         {
             using (DataBase context = new DataBase())
             {
+                var kierownik = context.Kierowniks.SingleOrDefault(c => c.kierownikID == model.IdKierownika);
                 DataBaseLayer.Promocja promocja = new DataBaseLayer.Promocja
                 {
                     DataWdrozenia = model.DataWdrozenia,
                     nazwaPromocji = model.NazwaPromocji,
-                    opisPromocji = model.OpisPromocji
+                    opisPromocji = model.OpisPromocji,
+                    kierownikID = model.IdKierownika,
+                    Kierownik = kierownik
                 };
                 context.Promocjas.Add(promocja);
                 context.SaveChanges();
@@ -94,7 +97,8 @@ namespace DataServiceLayer.Service
                         DataWdrozenia = promocja.DataWdrozenia,
                         NazwaPromocji = promocja.nazwaPromocji,
                         OpisPromocji = promocja.opisPromocji,
-                        IDPromoca = promocja.promocjaID
+                        IDPromoca = promocja.promocjaID,
+                        NazwaKierownika = promocja.Kierownik.imie + " " + promocja.Kierownik.nazwisko
                     });
                 }
                 return list;

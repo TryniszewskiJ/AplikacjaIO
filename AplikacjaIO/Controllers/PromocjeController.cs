@@ -3,6 +3,7 @@ using DataServiceLayer.Models.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 
@@ -42,6 +43,7 @@ namespace AplikacjaIO.Controllers
         public ActionResult Edytuj(int IdPromocji)
         {
             PromocjeModel model = _promocja.GetPromocje(IdPromocji);
+            model.IdKierownika = Convert.ToInt32(((ClaimsPrincipal)User).FindFirst(ClaimTypes.NameIdentifier).Value);
             return View("Wprowadz", model);
         }
         [HttpPost]

@@ -12,16 +12,13 @@ namespace DataBaseLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class ObslugaRaportow
+    public partial class PozycjeNaRachunku
     {
-        public Nullable<int> id_raportu { get; set; }
-        public string trescRaportu { get; set; }
-        public Nullable<System.DateTime> dataRaportu { get; set; }
-        public int obslugaRaportowID { get; set; }
-        public int kasjerID { get; set; }
-        public Nullable<int> kierownikID { get; set; }
+        public int IdPozycji { get; set; }
+        public Nullable<double> Ilosc { get; set; }
+        public Nullable<int> Cena { get; set; }
+        public Nullable<int> IdRachunku { get; set; }
     
-        public virtual Kasjer Kasjer { get; set; }
-        public virtual Kierownik Kierownik { get; set; }
+        public virtual Rachunki Rachunki { get; set; }
     }
 }
