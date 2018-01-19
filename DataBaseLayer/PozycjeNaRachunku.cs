@@ -16,7 +16,7 @@ namespace DataBaseLayer
     {
         public int IdPozycji { get; set; }
         public Nullable<double> Ilosc { get; set; }
-        public Nullable<int> Cena { get; set; }
+        public Nullable<double> Cena { get; set; }
         public Nullable<int> IdRachunku { get; set; }
     
         public virtual Rachunki Rachunki { get; set; }

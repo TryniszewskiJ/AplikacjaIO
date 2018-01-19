@@ -86,17 +86,18 @@
   <ItemGroup>
     <Compile Include="IService\IKasjer.cs" />
     <Compile Include="IService\IKierownik.cs" />
-    <Compile Include="IService\IObslugaRachunku.cs" />
+    <Compile Include="IService\IRachunki.cs" />
     <Compile Include="IService\IObslugaRaportow.cs" />
     <Compile Include="IService\IPromocja.cs" />
     <Compile Include="Models\App\LoginModel.cs" />
     <Compile Include="Models\View\LoginModel.cs" />
     <Compile Include="Models\View\PromocjeModel.cs" />
+    <Compile Include="Models\View\RachunkiModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Kasjer.cs" />
     <Compile Include="Service\Kierownik.cs" />
     <Compile Include="Service\ObslugaRaportow.cs" />
-    <Compile Include="Service\ObsługaRachunku.cs" />
+    <Compile Include="Service\Rachunki.cs" />
     <Compile Include="Service\Promocja.cs" />
   </ItemGroup>
   <ItemGroup>
