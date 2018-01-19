@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BazaIOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Kasjer">
+          <Key>
+            <PropertyRef Name="kasjerID" />
+          </Key>
+          <Property Name="imie" Type="char" MaxLength="10" />
+          <Property Name="nazwisko" Type="char" MaxLength="10" />
+          <Property Name="haslo" Type="char" MaxLength="10" />
+          <Property Name="kasjerID" Type="int" Nullable="false" />
+          <Property Name="Login" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kierownik">
+          <Key>
+            <PropertyRef Name="kierownikID" />
+          </Key>
+          <Property Name="imie" Type="char" MaxLength="10" />
+          <Property Name="nazwisko" Type="char" MaxLength="10" />
+          <Property Name="haslo" Type="char" MaxLength="10" />
+          <Property Name="kierownikID" Type="int" Nullable="false" />
+          <Property Name="Login" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ObslugaRachunku">
+          <Key>
+            <PropertyRef Name="obslugaRachunkuID" />
+          </Key>
+          <Property Name="id_rachunku" Type="int" />
+          <Property Name="skladRachunku" Type="char" MaxLength="10" />
+          <Property Name="wysokoscRachunku" Type="float" />
+          <Property Name="obslugaRachunkuID" Type="int" Nullable="false" />
+          <Property Name="kasjerID" Type="int" />
+        </EntityType>
+        <EntityType Name="ObslugaRaportow">
+          <Key>
+            <PropertyRef Name="obslugaRaportowID" />
+          </Key>
+          <Property Name="id_raportu" Type="int" />
+          <Property Name="trescRaportu" Type="char" MaxLength="10" />
+          <Property Name="dataRaportu" Type="date" />
+          <Property Name="obslugaRaportowID" Type="int" Nullable="false" />
+          <Property Name="kasjerID" Type="int" Nullable="false" />
+          <Property Name="kierownikID" Type="int" />
+        </EntityType>
+        <EntityType Name="Promocja">
+          <Key>
+            <PropertyRef Name="promocjaID" />
+          </Key>
+          <Property Name="id_promocji" Type="int" />
+          <Property Name="nazwaPromocji" Type="char" MaxLength="10" />
+          <Property Name="opisPromocji" Type="varchar" MaxLength="250" />
+          <Property Name="promocjaID" Type="int" Nullable="false" />
+          <Property Name="kasjerID" Type="int" />
+          <Property Name="kierownikID" Type="int" />
+          <Property Name="DataWdrozenia" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ObslugaRachunku_Kasjer">
+          <End Role="Kasjer" Type="Self.Kasjer" Multiplicity="0..1" />
+          <End Role="ObslugaRachunku" Type="Self.ObslugaRachunku" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kasjer">
+              <PropertyRef Name="kasjerID" />
+            </Principal>
+            <Dependent Role="ObslugaRachunku">
+              <PropertyRef Name="kasjerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObslugaRaportow_Kasjer">
+          <End Role="Kasjer" Type="Self.Kasjer" Multiplicity="1" />
+          <End Role="ObslugaRaportow" Type="Self.ObslugaRaportow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kasjer">
+              <PropertyRef Name="kasjerID" />
+            </Principal>
+            <Dependent Role="ObslugaRaportow">
+              <PropertyRef Name="kasjerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObslugaRaportow_Kierownik">
+          <End Role="Kierownik" Type="Self.Kierownik" Multiplicity="0..1" />
+          <End Role="ObslugaRaportow" Type="Self.ObslugaRaportow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kierownik">
+              <PropertyRef Name="kierownikID" />
+            </Principal>
+            <Dependent Role="ObslugaRaportow">
+              <PropertyRef Name="kierownikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promocja_Kasjer">
+          <End Role="Kasjer" Type="Self.Kasjer" Multiplicity="0..1" />
+          <End Role="Promocja" Type="Self.Promocja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kasjer">
+              <PropertyRef Name="kasjerID" />
+            </Principal>
+            <Dependent Role="Promocja">
+              <PropertyRef Name="kasjerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promocja_Kierownik">
+          <End Role="Kierownik" Type="Self.Kierownik" Multiplicity="0..1" />
+          <End Role="Promocja" Type="Self.Promocja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kierownik">
+              <PropertyRef Name="kierownikID" />
+            </Principal>
+            <Dependent Role="Promocja">
+              <PropertyRef Name="kierownikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BazaIOModelStoreContainer">
+          <EntitySet Name="Kasjer" EntityType="Self.Kasjer" Schema="1468_IO" store:Type="Tables" />
+          <EntitySet Name="Kierownik" EntityType="Self.Kierownik" Schema="1468_IO" store:Type="Tables" />
+          <EntitySet Name="ObslugaRachunku" EntityType="Self.ObslugaRachunku" Schema="1468_IO" store:Type="Tables" />
+          <EntitySet Name="ObslugaRaportow" EntityType="Self.ObslugaRaportow" Schema="1468_IO" store:Type="Tables" />
+          <EntitySet Name="Promocja" EntityType="Self.Promocja" Schema="1468_IO" store:Type="Tables" />
+          <AssociationSet Name="FK_ObslugaRachunku_Kasjer" Association="Self.FK_ObslugaRachunku_Kasjer">
+            <End Role="Kasjer" EntitySet="Kasjer" />
+            <End Role="ObslugaRachunku" EntitySet="ObslugaRachunku" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObslugaRaportow_Kasjer" Association="Self.FK_ObslugaRaportow_Kasjer">
+            <End Role="Kasjer" EntitySet="Kasjer" />
+            <End Role="ObslugaRaportow" EntitySet="ObslugaRaportow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObslugaRaportow_Kierownik" Association="Self.FK_ObslugaRaportow_Kierownik">
+            <End Role="Kierownik" EntitySet="Kierownik" />
+            <End Role="ObslugaRaportow" EntitySet="ObslugaRaportow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promocja_Kasjer" Association="Self.FK_Promocja_Kasjer">
+            <End Role="Kasjer" EntitySet="Kasjer" />
+            <End Role="Promocja" EntitySet="Promocja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promocja_Kierownik" Association="Self.FK_Promocja_Kierownik">
+            <End Role="Kierownik" EntitySet="Kierownik" />
+            <End Role="Promocja" EntitySet="Promocja" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BazaIOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Kasjer">
+          <Key>
+            <PropertyRef Name="kasjerID" />
+          </Key>
+          <Property Name="imie" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="haslo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="kasjerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ObslugaRachunkus" Relationship="Self.FK_ObslugaRachunku_Kasjer" FromRole="Kasjer" ToRole="ObslugaRachunku" />
+          <NavigationProperty Name="ObslugaRaportows" Relationship="Self.FK_ObslugaRaportow_Kasjer" FromRole="Kasjer" ToRole="ObslugaRaportow" />
+          <NavigationProperty Name="Promocjas" Relationship="Self.FK_Promocja_Kasjer" FromRole="Kasjer" ToRole="Promocja" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Kierownik">
+          <Key>
+            <PropertyRef Name="kierownikID" />
+          </Key>
+          <Property Name="imie" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="haslo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="kierownikID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ObslugaRaportows" Relationship="Self.FK_ObslugaRaportow_Kierownik" FromRole="Kierownik" ToRole="ObslugaRaportow" />
+          <NavigationProperty Name="Promocjas" Relationship="Self.FK_Promocja_Kierownik" FromRole="Kierownik" ToRole="Promocja" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ObslugaRachunku">
+          <Key>
+            <PropertyRef Name="obslugaRachunkuID" />
+          </Key>
+          <Property Name="id_rachunku" Type="Int32" />
+          <Property Name="skladRachunku" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="wysokoscRachunku" Type="Double" />
+          <Property Name="obslugaRachunkuID" Type="Int32" Nullable="false" />
+          <Property Name="kasjerID" Type="Int32" />
+          <NavigationProperty Name="Kasjer" Relationship="Self.FK_ObslugaRachunku_Kasjer" FromRole="ObslugaRachunku" ToRole="Kasjer" />
+        </EntityType>
+        <EntityType Name="ObslugaRaportow">
+          <Key>
+            <PropertyRef Name="obslugaRaportowID" />
+          </Key>
+          <Property Name="id_raportu" Type="Int32" />
+          <Property Name="trescRaportu" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="dataRaportu" Type="DateTime" Precision="0" />
+          <Property Name="obslugaRaportowID" Type="Int32" Nullable="false" />
+          <Property Name="kasjerID" Type="Int32" Nullable="false" />
+          <Property Name="kierownikID" Type="Int32" />
+          <NavigationProperty Name="Kasjer" Relationship="Self.FK_ObslugaRaportow_Kasjer" FromRole="ObslugaRaportow" ToRole="Kasjer" />
+          <NavigationProperty Name="Kierownik" Relationship="Self.FK_ObslugaRaportow_Kierownik" FromRole="ObslugaRaportow" ToRole="Kierownik" />
+        </EntityType>
+        <EntityType Name="Promocja">
+          <Key>
+            <PropertyRef Name="promocjaID" />
+          </Key>
+          <Property Name="id_promocji" Type="Int32" />
+          <Property Name="nazwaPromocji" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="opisPromocji" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="promocjaID" Type="Int32" Nullable="false" />
+          <Property Name="kasjerID" Type="Int32" />
+          <Property Name="kierownikID" Type="Int32" />
+          <NavigationProperty Name="Kasjer" Relationship="Self.FK_Promocja_Kasjer" FromRole="Promocja" ToRole="Kasjer" />
+          <NavigationProperty Name="Kierownik" Relationship="Self.FK_Promocja_Kierownik" FromRole="Promocja" ToRole="Kierownik" />
+          <Property Name="DataWdrozenia" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_ObslugaRachunku_Kasjer">
+          <End Role="Kasjer" Type="Self.Kasjer" Multiplicity="0..1" />
+          <End Role="ObslugaRachunku" Type="Self.ObslugaRachunku" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kasjer">
+              <PropertyRef Name="kasjerID" />
+            </Principal>
+            <Dependent Role="ObslugaRachunku">
+              <PropertyRef Name="kasjerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObslugaRaportow_Kasjer">
+          <End Role="Kasjer" Type="Self.Kasjer" Multiplicity="1" />
+          <End Role="ObslugaRaportow" Type="Self.ObslugaRaportow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kasjer">
+              <PropertyRef Name="kasjerID" />
+            </Principal>
+            <Dependent Role="ObslugaRaportow">
+              <PropertyRef Name="kasjerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promocja_Kasjer">
+          <End Role="Kasjer" Type="Self.Kasjer" Multiplicity="0..1" />
+          <End Role="Promocja" Type="Self.Promocja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kasjer">
+              <PropertyRef Name="kasjerID" />
+            </Principal>
+            <Dependent Role="Promocja">
+              <PropertyRef Name="kasjerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObslugaRaportow_Kierownik">
+          <End Role="Kierownik" Type="Self.Kierownik" Multiplicity="0..1" />
+          <End Role="ObslugaRaportow" Type="Self.ObslugaRaportow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kierownik">
+              <PropertyRef Name="kierownikID" />
+            </Principal>
+            <Dependent Role="ObslugaRaportow">
+              <PropertyRef Name="kierownikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promocja_Kierownik">
+          <End Role="Kierownik" Type="Self.Kierownik" Multiplicity="0..1" />
+          <End Role="Promocja" Type="Self.Promocja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kierownik">
+              <PropertyRef Name="kierownikID" />
+            </Principal>
+            <Dependent Role="Promocja">
+              <PropertyRef Name="kierownikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataBase" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Kasjers" EntityType="Self.Kasjer" />
+          <EntitySet Name="Kierowniks" EntityType="Self.Kierownik" />
+          <EntitySet Name="ObslugaRachunkus" EntityType="Self.ObslugaRachunku" />
+          <EntitySet Name="ObslugaRaportows" EntityType="Self.ObslugaRaportow" />
+          <EntitySet Name="Promocjas" EntityType="Self.Promocja" />
+          <AssociationSet Name="FK_ObslugaRachunku_Kasjer" Association="Self.FK_ObslugaRachunku_Kasjer">
+            <End Role="Kasjer" EntitySet="Kasjers" />
+            <End Role="ObslugaRachunku" EntitySet="ObslugaRachunkus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObslugaRaportow_Kasjer" Association="Self.FK_ObslugaRaportow_Kasjer">
+            <End Role="Kasjer" EntitySet="Kasjers" />
+            <End Role="ObslugaRaportow" EntitySet="ObslugaRaportows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promocja_Kasjer" Association="Self.FK_Promocja_Kasjer">
+            <End Role="Kasjer" EntitySet="Kasjers" />
+            <End Role="Promocja" EntitySet="Promocjas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObslugaRaportow_Kierownik" Association="Self.FK_ObslugaRaportow_Kierownik">
+            <End Role="Kierownik" EntitySet="Kierowniks" />
+            <End Role="ObslugaRaportow" EntitySet="ObslugaRaportows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promocja_Kierownik" Association="Self.FK_Promocja_Kierownik">
+            <End Role="Kierownik" EntitySet="Kierowniks" />
+            <End Role="Promocja" EntitySet="Promocjas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BazaIOModelStoreContainer" CdmEntityContainer="DataBase">
+          <EntitySetMapping Name="Kasjers">
+            <EntityTypeMapping TypeName="BazaIOModel.Kasjer">
+              <MappingFragment StoreEntitySet="Kasjer">
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="haslo" ColumnName="haslo" />
+                <ScalarProperty Name="kasjerID" ColumnName="kasjerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kierowniks">
+            <EntityTypeMapping TypeName="BazaIOModel.Kierownik">
+              <MappingFragment StoreEntitySet="Kierownik">
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="haslo" ColumnName="haslo" />
+                <ScalarProperty Name="kierownikID" ColumnName="kierownikID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ObslugaRachunkus">
+            <EntityTypeMapping TypeName="BazaIOModel.ObslugaRachunku">
+              <MappingFragment StoreEntitySet="ObslugaRachunku">
+                <ScalarProperty Name="id_rachunku" ColumnName="id_rachunku" />
+                <ScalarProperty Name="skladRachunku" ColumnName="skladRachunku" />
+                <ScalarProperty Name="wysokoscRachunku" ColumnName="wysokoscRachunku" />
+                <ScalarProperty Name="obslugaRachunkuID" ColumnName="obslugaRachunkuID" />
+                <ScalarProperty Name="kasjerID" ColumnName="kasjerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ObslugaRaportows">
+            <EntityTypeMapping TypeName="BazaIOModel.ObslugaRaportow">
+              <MappingFragment StoreEntitySet="ObslugaRaportow">
+                <ScalarProperty Name="id_raportu" ColumnName="id_raportu" />
+                <ScalarProperty Name="trescRaportu" ColumnName="trescRaportu" />
+                <ScalarProperty Name="dataRaportu" ColumnName="dataRaportu" />
+                <ScalarProperty Name="obslugaRaportowID" ColumnName="obslugaRaportowID" />
+                <ScalarProperty Name="kasjerID" ColumnName="kasjerID" />
+                <ScalarProperty Name="kierownikID" ColumnName="kierownikID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promocjas">
+            <EntityTypeMapping TypeName="BazaIOModel.Promocja">
+              <MappingFragment StoreEntitySet="Promocja">
+                <ScalarProperty Name="DataWdrozenia" ColumnName="DataWdrozenia" />
+                <ScalarProperty Name="id_promocji" ColumnName="id_promocji" />
+                <ScalarProperty Name="nazwaPromocji" ColumnName="nazwaPromocji" />
+                <ScalarProperty Name="opisPromocji" ColumnName="opisPromocji" />
+                <ScalarProperty Name="promocjaID" ColumnName="promocjaID" />
+                <ScalarProperty Name="kasjerID" ColumnName="kasjerID" />
+                <ScalarProperty Name="kierownikID" ColumnName="kierownikID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,51 @@
+﻿@model DataServiceLayer.Models.View.PromocjeModel
+@{
+    ViewBag.Title = "Wprowadz";
+}
+
+@if (Model != null)
+{
+    <h2>Edycja</h2>
+    @Html.HiddenFor(model => model.IDPromoca)
+}
+else
+{
+    <h2>Wprowadz</h2>
+}
+@if (ViewBag.Status == true)
+{
+    <div>
+        Zedytowano
+    </div>
+}
+else
+{
+    <div>
+        jednak nie
+    </div>
+}
+@using (Html.BeginForm("Wprowadz", "Promocje", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(Model => Model.NazwaPromocji)
+        @Html.ValidationMessageFor(model => model.NazwaPromocji)
+    </div>
+    <div>
+        @Html.EditorFor(Model => Model.NazwaPromocji)
+    </div>
+    <div>
+        @Html.LabelFor(c => c.OpisPromocji)
+        @Html.ValidationMessageFor(model => model.OpisPromocji)
+    </div>
+    <div>
+        @Html.EditorFor(Model => Model.OpisPromocji)
+    </div>
+    <div>
+        @Html.LabelFor(c => c.DataWdrozenia)
+        @Html.ValidationMessageFor(model => model.DataWdrozenia)
+    </div>
+    <div>
+        @Html.EditorFor(Model => Model.DataWdrozenia)
+    </div>
+    <input type="submit" value="Sign In">
+}

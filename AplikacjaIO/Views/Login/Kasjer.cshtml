@@ -1,0 +1,25 @@
+﻿@model DataServiceLayer.Models.View.LoginModel
+@{
+    ViewBag.Title = "Kasjer";
+}
+
+<h2>Kasjer</h2>
+@using (Html.BeginForm("Kasjer", "Login", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(c => c.Login)
+        @Html.ValidationMessageFor(model => model.Login)
+    </div>
+    <div>
+        @Html.EditorFor(Model => Model.Login)
+    </div>
+    <div>
+        @Html.LabelFor(c => c.Haslo)
+        @Html.ValidationMessageFor(model => model.Haslo)
+    </div>
+    <div>
+        @Html.PasswordFor(Model => Model.Haslo)
+    </div>
+    <input type="submit" value="Sign In">
+}
+
