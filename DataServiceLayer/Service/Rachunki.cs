@@ -19,7 +19,7 @@ namespace DataServiceLayer.Service
 {
     public class Rachunki : IRachunki
     {
-        RachunkiModel Dodaj(RachunkiModel model,int IdKasjer)
+        public RachunkiModel Dodaj(RachunkiModel model,int IdKasjer)
         {
             using (DataBase context = new DataBase())
             {
