@@ -7,6 +7,7 @@
 {
     <h2>Edycja</h2>
     @Html.HiddenFor(model => model.IDPromoca)
+    
 }
 else
 {
@@ -24,28 +25,62 @@ else
         jednak nie
     </div>
 }
-@using (Html.BeginForm("Wprowadz", "Promocje", FormMethod.Post))
-{
-    <div>
-        @Html.LabelFor(Model => Model.NazwaPromocji)
-        @Html.ValidationMessageFor(model => model.NazwaPromocji)
-    </div>
-    <div>
-        @Html.EditorFor(Model => Model.NazwaPromocji)
-    </div>
-    <div>
-        @Html.LabelFor(c => c.OpisPromocji)
-        @Html.ValidationMessageFor(model => model.OpisPromocji)
-    </div>
-    <div>
-        @Html.EditorFor(Model => Model.OpisPromocji)
-    </div>
-    <div>
-        @Html.LabelFor(c => c.DataWdrozenia)
-        @Html.ValidationMessageFor(model => model.DataWdrozenia)
-    </div>
-    <div>
-        @Html.EditorFor(Model => Model.DataWdrozenia)
-    </div>
-    <input type="submit" value="Sign In">
+@{
+    string akcja = "Wprowadz";
+    if (Model != null)
+    {
+        <h2>Edycja</h2>
+        @Html.HiddenFor(model => model.IDPromoca)
+        akcja = "Edytuj";
+    }
+    else
+    {
+        <h2>Wprowadz</h2>
+    }
+    if (ViewBag.Status == true)
+    {
+        <div>
+            Zedytowano
+        </div>
+    }
+    else
+    {
+        <div>
+            jednak nie
+        </div>
+    }
+    using (Html.BeginForm(akcja, "Promocje", FormMethod.Post))
+    {
+        <div>
+            @Html.LabelFor(Model => Model.NazwaPromocji)
+            @Html.ValidationMessageFor(model => model.NazwaPromocji)
+        </div>
+        <div>
+            @Html.EditorFor(Model => Model.NazwaPromocji)
+        </div>
+        <div>
+            @Html.LabelFor(c => c.OpisPromocji)
+            @Html.ValidationMessageFor(model => model.OpisPromocji)
+        </div>
+        <div>
+            @Html.EditorFor(Model => Model.OpisPromocji)
+        </div>
+        <div>
+            @Html.LabelFor(c => c.DataWdrozenia)
+            @Html.ValidationMessageFor(model => model.DataWdrozenia)
+        </div>
+        <div>
+            @Html.EditorFor(Model => Model.DataWdrozenia)
+        </div>
+        if (Model != null)
+        {
+            <input type="submit" value="Zapisz zmiany">
+            //button do usuniecia
+        }
+        else
+        {
+            <input type="submit" value="Zapisz promocje">
+        }
+    }
+
 }
