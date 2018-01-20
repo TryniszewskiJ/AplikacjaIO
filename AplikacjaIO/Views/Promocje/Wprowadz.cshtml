@@ -24,10 +24,20 @@
     else
     {
         <h2>Wprowadz</h2>
+        if (ViewBag.czyPost == true)
+        {
+            if (ViewBag.Status == true)
+            {
+                //tutaj ze sie zapisaly zmiany
+            }
+            else
+            {
+                //tutaj inforamcja ze nie udalo sie zapisac zmian
+            }
+        }
     }
     using (Html.BeginForm(akcja, "Promocje", FormMethod.Post))
     {
-        Html.HiddenFor(model => model.IDPromoca);
             <div class="container-fluid">
                 <div class="container">
                     <div class="row" style="margin-top:2.5%;margin-bottom:5%">
@@ -73,6 +83,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
+                        @Html.HiddenFor(model => model.IDPromoca)
                         <button type="submit" class="btn btn-primary">Zapisz Zmiany</button>
                     </div>
                 </div>

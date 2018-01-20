@@ -30,12 +30,14 @@ namespace AplikacjaIO.Controllers
         public ActionResult Wprowadz()
         {
             ViewBag.czyEdycja = false;
+            ViewBag.czyPost = false;
             return View();
         }
         [HttpPost]
         public ActionResult Wprowadz(PromocjeModel model)
         {
             ViewBag.czyEdycja = false;
+            ViewBag.czyPost = true; ;
             model = _promocja.Wprowadz(model);
             ViewBag.Status = true;
             return View(model);
