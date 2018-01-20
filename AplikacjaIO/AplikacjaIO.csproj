@@ -298,6 +298,7 @@
     <Content Include="Views\Promocje\Wprowadz.cshtml" />
     <Content Include="Views\Rachunki\Index.cshtml" />
     <Content Include="Views\Rachunki\Zobacz.cshtml" />
+    <Content Include="Views\Rachunki\Otworz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

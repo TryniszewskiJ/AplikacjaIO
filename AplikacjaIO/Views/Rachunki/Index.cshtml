@@ -8,13 +8,13 @@
     <div class="row mar-top50">
         <table id="Promocje">
             <tr style="border-bottom:1px solid black;text-align:center;padding-bottom:10px;">
-                <td style="width:25%;border-right:1px solid black">
+                <td style="width:33.3333%;border-right:1px solid black">
                     <strong style="font-size:20px;">@Html.LabelFor(model => model.FirstOrDefault().IdRachunku)</strong>
                 </td>
-                <td style="width:25%;border-right:1px solid black">
+                <td style="width:33.3333%;border-right:1px solid black">
                     <strong style="font-size:20px;">@Html.LabelFor(model => model.FirstOrDefault().Wysokosc)</strong>
                 </td>
-                <td style="width:25%;border-right:1px solid black">
+                <td style="width:33.3333%;border-right:1px solid black">
                     <strong style="font-size:20px;">@Html.LabelFor(model => model.FirstOrDefault().DataRachunku)</strong>
                 </td>
                 <td></td>
@@ -30,7 +30,7 @@
                             @Html.DisplayFor(model => model[i].Wysokosc, new { htmlAttributes = new { @class = "form-control intro-input" } })
                         </td>
                         <td style="padding-top:10px;padding-bottom:10px;">
-                            @Html.DisplayFor(model => model[i].DataRachunku.ToString("MM/dd/yy H:mm"), new { htmlAttributes = new { @class = "form-control intro-input" } })
+                            @Html.DisplayFor(model => model[i].DataRachunku, new { htmlAttributes = new { @class = "form-control intro-input" } })
                         </td>
                         <td style="padding-top:10px;padding-bottom:10px;">
                             <button class="btn btn-danger btn-block">Usuń</button> @*TRZEBA USUWANIE ZROBIC*@

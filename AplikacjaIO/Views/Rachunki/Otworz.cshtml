@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewBag.Title = "Otworz";
+}
+
+<h2>Otworz</h2>
+@using (Html.BeginForm("Zamknij", "Rachunki", FormMethod.Post))
+{
+    <div class="container-fluid" style="background-color:#dadada">
+        <div class="row">
+            <div class="col-xs-1" style="bottom:35px;left:430px">
+                <div class="halCIrclee" style="z-index:3"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row" style="margin:10px 0 10px 0">
+                        <div class="col-xs-6">
+                            <strong><span style="font-size:32px">Rachunek</span></strong>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin:10px 0 10px 0">
+                <div class="col-xs-12">
+                    <div class="row" style="margin:10px 0 10px 0;">
+                        <div class="col-xs-3">
+                            <strong><span>Numer Pozycji</span></strong>
+                            <br />
+                            <div style="margin-top:20px">
+                                <span>lp.1</span>
+                            </div>
+                            <div style="margin-top:20px">
+                                <span>lp.2</span>
+                            </div>
+                            <div style="margin-top:20px">
+                                <span>lp.3</span>
+                            </div>
+                            <div style="margin-top:20px">
+                                <span>lp.4</span>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-3">
+                            <strong><span>Waga(g)</span></strong>
+                            <div style="margin-top:20px">
+                                <span>200</span>
+                            </div>
+                            <div style="margin-top:20px">
+                                <span>300</span>
+                            </div>
+                            <div style="margin-top:20px">
+                                <span>500</span>
+                            </div>
+                            <div style="margin-top:20px">
+                                <input type="text" value="0" class="form-control" style="width:100px" />
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div style="margin-top:10px;border-top:1px solid black">
+                                        <span>
+                                            Suma: 1000(g)
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-3">
+                            <strong><span>Cena(3.49zł/100g)</span></strong>
+                            <div style="margin-top:20px">
+                                <span>6.98</span>
+                            </div>
+                            <div style="margin-top:20px">
+                                <span>10.47</span>
+                            </div>
+                            <div style="margin-top:20px">
+                                <span>17.45</span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6" style="margin-top:20px;width:160px">
+                                    <select class="form-control">
+                                        <option value="Brak">Brak Rabatu</option>
+                                        <option value="Wieczorna">Wieczorna</option>
+                                        <option value="Studencka">Studencka</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div style="margin-top:10px;border-top:1px solid black">
+                                        <span>
+                                            Suma: 34.9 zł
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-3">
+                            <div style="margin-top:30px">
+                                <button class="btn btn-danger">Usuń pozycję</button>
+                            </div>
+                            <div style="margin-top:5px">
+                                <button class="btn btn-danger">Usuń pozycję</button>
+                            </div>
+                            <div style="margin-top:5px">
+                                <button class="btn btn-danger">Usuń pozycję</button>
+                            </div>
+
+                            <div style="margin-top:18px">
+                                <button class="btn btn-primary">Dodaj pozycję</button>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin:20px 0 20px 0">
+                    <div class="col-xs-6">
+                        <button class="btn btn-primary"> Zamknij Rachunek</button>
+                    </div>
+                </div>
+
+                <div class="row" style="margin:10px 0 10px 0">
+                    <div class="col-xs-6">
+
+                        <a> Wróć do listy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
