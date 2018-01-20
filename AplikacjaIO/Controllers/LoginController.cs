@@ -46,7 +46,7 @@ namespace AplikacjaIO.Controllers
             {
                 var identity = ClaimHellper.CreateIdentity(uzytkownik);
                 HttpContext.GetOwinContext().Authentication.SignIn(identity);
-                return RedirectToAction("Index", " MenuUzytkownika", new { Id = uzytkownik.UzytkownikId });
+                return RedirectToAction("Index", "MenuUzytkownika", new { Id = uzytkownik.UzytkownikId });
             }
             else
             {
@@ -73,7 +73,7 @@ namespace AplikacjaIO.Controllers
             {
                 var identity = ClaimHellper.CreateIdentity(uzytkownik);
                 HttpContext.GetOwinContext().Authentication.SignIn(identity);
-                return RedirectToAction("Index", " MenuUzytkownika", new { Id = uzytkownik.UzytkownikId });
+                return RedirectToAction("Index", "MenuUzytkownika");
             }
             else
             {

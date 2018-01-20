@@ -29,11 +29,13 @@ namespace AplikacjaIO.Controllers
         [HttpGet]
         public ActionResult Wprowadz()
         {
+            ViewBag.czyEdycja = false;
             return View();
         }
         [HttpPost]
         public ActionResult Wprowadz(PromocjeModel model)
         {
+            ViewBag.czyEdycja = false;
             model = _promocja.Wprowadz(model);
             ViewBag.Status = true;
             return View(model);
@@ -43,12 +45,16 @@ namespace AplikacjaIO.Controllers
         public ActionResult Edytuj(int IdPromocji)
         {
             PromocjeModel model = _promocja.GetPromocje(IdPromocji);
+            ViewBag.czyEdycja = true;
+            ViewBag.czyPost = false;
             model.IdKierownika = Convert.ToInt32(((ClaimsPrincipal)User).FindFirst(ClaimTypes.NameIdentifier).Value);
             return View("Wprowadz", model);
         }
         [HttpPost]
         public ActionResult Edytuj(PromocjeModel model)
         {
+            ViewBag.czyEdycja = true;
+            ViewBag.czyPost = true;
             model = _promocja.Edycja(model);
             ViewBag.Status = true;
             return View();

@@ -15,11 +15,11 @@ namespace AplikacjaIO.Controllers
             var role = ((ClaimsPrincipal)User).FindFirst(ClaimTypes.Role).Value;
             if(role == "Kierownik")
             {
-                RedirectToAction("Kierownik");
+                return RedirectToAction("Kierownik", "MenuUzytkownika");
             }
             else
             {
-                RedirectToAction("Kasjer");
+                return RedirectToAction("Kasjer", "MenuUzytkownika");
             }
             return View();
         }
