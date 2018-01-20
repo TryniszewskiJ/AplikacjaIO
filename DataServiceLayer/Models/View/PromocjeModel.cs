@@ -16,6 +16,7 @@ namespace DataServiceLayer.Models.View
         [Display(Name = "Opis promocji")]
         [MaxLength(250)]
         [Required(ErrorMessage = "Pole wymagane")]
+        [DataType(DataType.MultilineText)] /*DODANE POD TEXTAREA*/
         public string OpisPromocji { get; set; }
         [Display(Name = "Data wdrożenia")]
         [DataType(DataType.DateTime)]

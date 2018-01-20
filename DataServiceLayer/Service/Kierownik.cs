@@ -49,7 +49,7 @@ namespace DataServiceLayer.Service
         {
             using (DataBase context = new DataBase())
             {
-                var kierownik = context.Kierowniks.Single(c => c.Login == model.Login && c.haslo == model.Haslo);
+                var kierownik = context.Kierowniks.SingleOrDefault(c => c.Login == model.Login && c.haslo == model.Haslo);
                 if (kierownik == null)
                     return null;
                 return new LoginModel

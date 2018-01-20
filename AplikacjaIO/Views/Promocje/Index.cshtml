@@ -3,43 +3,48 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-<table>
-    <tr>
-        <td>
-            @Html.LabelFor(model => model.FirstOrDefault().NazwaPromocji)
-        </td>
-        <td>
-            @Html.LabelFor(model => model.FirstOrDefault().OpisPromocji)
-        </td>
-        <td>
-            @Html.LabelFor(model => model.FirstOrDefault().DataWdrozenia)
-        </td>
-        <td>
-            @Html.LabelFor(model => model.FirstOrDefault().NazwaKierownika)
-        </td>
-        <td>
+<div class="container">
+    <div class="row mar-top50">
+            <table id="Promocje">
+                <tr style="border-bottom:1px solid black;text-align:center;padding-bottom:10px;">
+                    <td style="width:25%;border-right:1px solid black">
+                        <strong style="font-size:20px;">@Html.LabelFor(model => model.FirstOrDefault().NazwaPromocji)</strong>
+                    </td>
+                    <td style="width:25%;border-right:1px solid black">
+                         <strong style="font-size:20px;">@Html.LabelFor(model => model.FirstOrDefault().OpisPromocji)</strong>
+                    </td>
+                    <td style="width:25%;border-right:1px solid black">
+                        <strong style="font-size:20px;">@Html.LabelFor(model => model.FirstOrDefault().DataWdrozenia)</strong>
+                    </td>
+                    <td style="width:25%;border-right:1px solid black">
+                        <strong style="font-size:20px;">@Html.LabelFor(model => model.FirstOrDefault().NazwaKierownika)</strong>
+                    </td>
+                    <td></td>
+                </tr>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr class="spacer"></tr>
+                    <tr style="text-align:center;border-top:1px solid black;">
+                        <td style="padding-top:10px;padding-bottom:10px;">
+                            @Html.DisplayFor(model => model[i].NazwaPromocji, new { htmlAttributes = new { @class = "form-control intro-input"} })
+                        </td>
+                        <td style="padding-top:10px;padding-bottom:10px;">
+                            @Html.DisplayFor(model => model[i].OpisPromocji, new { htmlAttributes = new { @class = "form-control intro-input"} })
+                        </td>
+                        <td style="padding-top:10px;padding-bottom:10px;">
+                            @Html.DisplayFor(model => model[i].DataWdrozenia, new { htmlAttributes = new { @class = "form-control intro-input" } })
+                        </td>
+                        <td style="padding-top:10px;padding-bottom:10px;">
+                            @Html.DisplayFor(model => model[i].NazwaKierownika, new { htmlAttributes = new { @class = "form-control intro-input"} })
 
-        </td>
-    </tr>
-    @for(int i = 0;i < Model.Count;i++)
-    {
-        <tr>
-            <td>
-                @Html.EditorFor(model => model[i].NazwaPromocji)
-            </td>
-            <td>
-                @Html.EditorFor(model => model[i].OpisPromocji)
-            </td>
-            <td>
-                @Html.EditorFor(model => model[i].DataWdrozenia)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model[i].NazwaKierownika)
-            </td>
-            <td>
-                Button do edycji tutaj ewentulanie usuniecia 
-            </td>
-        </tr>
-    }
-</table>
+                        </td>
+                        <td style="padding-top:10px;padding-bottom:10px;">
+                            <button class="btn btn-danger btn-block">Usuń</button> @*TRZEBA USUWANIE ZROBIC*@
+                            @Html.ActionLink("Edytuj","Edytuj", "Promocje", new { IdPromocji = Model[i].IDPromoca }, new { @class = "btn btn-success" })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+

@@ -1,54 +1,118 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title — moja aplikacja platformy ASP.NET</title>
+    <link href="~/StyleSheet/Custom.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" />
+
+    @Scripts.Render("~/bundles/jQuery")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/font-awesome.css")
+    @Styles.Render("~/Content/font-awesome.min.css")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/Jq")
+
+
 </head>
 <body>
-    @if(User.Identity.IsAuthenticated)//tu moze byc navbar dla zalogowanego
-    {
-        if(((System.Security.Claims.ClaimsPrincipal)User).FindFirst(System.Security.Claims.ClaimTypes.Role).Value == "Kasjer")
-        {
-            //elementy dla kasjera w navbarze
-        }
-        else
-        {
-            //Elementy dla kierownika w navbarze
-        }
-    }
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nazwa aplikacji", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a id="test2" class="navbar-toggle collapsed btn-primary" data-toggle="collapse" @*data-target="#nav2"*@>
+                    <span id="nav-icon1">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </a>
+                <div id="nav-logo">
+                    <a href="">
+                        <span>Luna Express</span>
+
+                    </a>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
+
+            <div id="nav2" class="test2 collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Strona główna", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Informacje", "About", "Home")</li>
-                    <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                    @if ((System.Web.HttpContext.Current.User != null) && (System.Web.HttpContext.Current.User.Identity.IsAuthenticated))
+                    {
+                        <li>
+                            <a href="/home/index">Wyloguj</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="/home/index">Zaloguj</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
+    </nav>
+    <div>
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year — moja aplikacja platformy ASP.NET</p>
-        </footer>
     </div>
+    <footer style="position:absolute;bottom:0;width:100%;height:60px;background:black;">
+        <div class="container-fluid" style="background-color:black;min-height:100%">
+            <div class="container">
+                asd
+            </div>
+        </div>
+    </footer>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+
+
+
     @RenderSection("scripts", required: false)
+
 </body>
 </html>
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        $("a").click(function () {
+            var hash = this.hash;
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top
+            }, 1000);
+        });
+        $('#nav-icon1').click(function (e) {
+
+            $(this).toggleClass('open');
+            $(this).css('pointer-events', 'none');
+            if (!$('#nav2').hasClass('show')) {
+                $('.navbar-collapse').collapse('show');
+            }
+            else {
+                $('.navbar-collapse').collapse('hide');
+            }
+            setTimeout(function () {
+                $('#nav-icon1').css('pointer-events', 'auto');
+            }, 400);
+        });
+        $('#nav2').click(function () {
+            $('#nav-icon1').toggleClass('open');
+            $('.navbar-collapse').collapse('hide');
+        });
+
+        $(window).resize(function () {
+            if ($(window).width() > 768 && $('#nav2').hasClass('show')) {
+                $('#nav-icon1').toggleClass('open');
+                $('#nav2').removeClass('show');
+
+            }
+        });
+    });*@
+
+
+
+
+
+@*</script>*@

@@ -1,7 +1,16 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿
 
-<div class="jumbotron">
-    dwa przyciski logowanie kierownik ,logowanie kasjer
-</div>
+    <div class="container">
+        <div class="jumbotron" style="margin-top:15%">
+            <div class="row">
+                <div class="col-6" >
+                    <button style="float:right" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("Kierownik", "Login") + "'");">Logowanie Kierownik</button>
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("Kasjer", "Login") + "'");">Logowanie Kasjer</button>
+                </div>
+            </div>
+        </div>
+     </div>
+    
+
