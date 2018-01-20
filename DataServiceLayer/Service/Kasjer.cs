@@ -20,32 +20,6 @@ namespace DataServiceLayer.Service
 {
     public class Kasjer : IKasjer
     {
-
-        protected int haslo;
-        private int id_kasjera;
-        public char Imie;
-        public char nazwisko;
-
-        public Kasjer()
-        {
-
-        }
-
-        ~Kasjer()
-        {
-
-        }
-
-        public void AktywacjaRabatu()
-        {
-
-        }
-
-        public void ObslugaRachunku()
-        {
-
-        }
-
         public LoginModel Autoruzacja(Models.View.LoginModel model)//autoryzacja
         {
             using (DataBase context = new DataBase())

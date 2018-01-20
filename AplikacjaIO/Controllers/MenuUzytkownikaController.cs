@@ -21,7 +21,6 @@ namespace AplikacjaIO.Controllers
             {
                 return RedirectToAction("Kasjer", "MenuUzytkownika");
             }
-            return View();
         }
         [Authorize(Roles = "Kasjer")]
         // GET: MenuUzytkownika

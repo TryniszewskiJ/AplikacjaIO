@@ -12,24 +12,20 @@ namespace DataBaseLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class Rachunki
+    public partial class Raporty
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Rachunki()
+        public Raporty()
         {
-            this.PozycjeNaRachunkus = new HashSet<PozycjeNaRachunku>();
-            this.Raporties = new HashSet<Raporty>();
+            this.Rachunkis = new HashSet<Rachunki>();
         }
     
-        public int IdRachunku { get; set; }
-        public Nullable<double> wysokoscRachunku { get; set; }
-        public Nullable<int> kasjerID { get; set; }
-        public Nullable<System.DateTime> DataRachunku { get; set; }
+        public int IdRaportu { get; set; }
+        public Nullable<double> Suma { get; set; }
+        public Nullable<System.DateTime> DataOd { get; set; }
+        public Nullable<System.DateTime> DataDo { get; set; }
     
-        public virtual Kasjer Kasjer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PozycjeNaRachunku> PozycjeNaRachunkus { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Raporty> Raporties { get; set; }
+        public virtual ICollection<Rachunki> Rachunkis { get; set; }
     }
 }

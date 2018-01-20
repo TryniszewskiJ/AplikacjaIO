@@ -1,0 +1,135 @@
+﻿@model DataServiceLayer.Models.View.RaportModel
+
+<h2>Utworz</h2>
+@{
+    string akcja = "Utworz";
+
+    if (ViewBag.czyEdycja == true)
+    {
+        akcja = "Edytuj";
+        <div class="container">
+            <div class="row" style="margin-top:2.5%;margin-bottom:5%">
+                <div class="col-12" style="font-family:Arial, Helvetica, sans-serif">
+                    <span style="font-size:36px"><strong>Edytuj Promocję!</strong></span>
+                </div>
+            </div>
+        </div>
+        if (ViewBag.czyPost == true)
+        {
+            if (ViewBag.Status == true)
+            {
+                //tutaj ze sie zapisaly zmiany
+                <div class="container">
+                    <div class="row" style="margin-top:2.5%;margin-bottom:5%">
+                        <div class="col-12" style="font-family:Arial, Helvetica, sans-serif">
+                            <span style="font-size:32px;color:lawngreen"><strong>Udało sie zapisać zmiany!</strong></span>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                //tutaj inforamcja ze nie udalo sie zapisac zmian
+                <div class="container">
+                    <div class="row" style="margin-top:2.5%;margin-bottom:5%">
+                        <div class="col-12" style="font-family:Arial, Helvetica, sans-serif">
+                            <span style="font-size:32px;color:red"><strong>Nie Udało sie zapisać zmiany!</strong></span>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+    else
+    {
+        <div class="container">
+            <div class="row" style="margin-top:2.5%;margin-bottom:5%">
+                <div class="col-12" style="font-family:Arial, Helvetica, sans-serif">
+                    <span style="font-size:36px"><strong>Wprowadz Promocję!</strong></span>
+                </div>
+            </div>
+        </div>
+        if (ViewBag.czyPost == true)
+        {
+            if (ViewBag.Status == true)
+            {
+                //tutaj ze sie zapisaly zmiany
+                <div class="container">
+                    <div class="row" style="margin-top:2.5%;margin-bottom:5%">
+                        <div class="col-12" style="font-family:Arial, Helvetica, sans-serif">
+                            <span style="font-size:32px;color:lawngreen"><strong>Promocja została dodana!</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            else
+            {
+                //tutaj inforamcja ze nie udalo sie zapisac zmian
+                <div class="container">
+                    <div class="row" style="margin-top:2.5%;margin-bottom:5%">
+                        <div class="col-12" style="font-family:Arial, Helvetica, sans-serif">
+                            <span style="font-size:32px;color:red"><strong>Promocja została dodana!</strong></span>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+    using (Html.BeginForm(akcja, "Promocje", FormMethod.Post))
+    {
+        <div class="container-fluid">
+            <div class="container">
+
+                <div class="row marg200200">
+                    <div class="col-md-2 col-12">
+                        <strong>@Html.LabelFor(Model => Model.DataOd , htmlAttributes: new { @class = "control-label labelIntro" })</strong>
+                    </div>
+                    <div class="col-md-3 col-12">
+                        @Html.EditorFor(Model => Model.DataOd, new { htmlAttributes = new { @class = "form-control intro-input" } })
+                        @Html.ValidationMessageFor(model => model.DataOd, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row marg200200">
+                    <div class="col-md-2 col-12">
+                        <strong>@Html.LabelFor(Model => Model.DataDo, htmlAttributes: new { @class = "control-label labelIntro" })</strong>
+                    </div>
+                    <div class="col-md-3 col-12">
+                        @Html.EditorFor(Model => Model.DataDo, new { htmlAttributes = new { @class = "form-control intro-input" } })
+                        @Html.ValidationMessageFor(model => model.DataDo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        if (Model != null)
+        {
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            @Html.HiddenFor(model => model.IdRaportu)
+                            <button type="submit" class="btn btn-primary">Zapisz Zmiany</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<input type="submit" value="Zapisz zmiany">*@
+            //button do usuniecia
+        }
+        else
+        {
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Zapisz Promocje</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+}
+

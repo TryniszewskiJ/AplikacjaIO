@@ -53,8 +53,29 @@
           <Property Name="kasjerID" Type="int" />
           <Property Name="DataRachunku" Type="datetime" />
         </EntityType>
+        <EntityType Name="Raporty">
+          <Key>
+            <PropertyRef Name="IdRaportu" />
+          </Key>
+          <Property Name="IdRaportu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Suma" Type="float" />
+          <Property Name="DataOd" Type="datetime" />
+          <Property Name="DataDo" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Raporty_Rachunki">
+          <Key>
+            <PropertyRef Name="IdRaportu" />
+            <PropertyRef Name="IdRachunku" />
+          </Key>
+          <Property Name="IdRaportu" Type="int" Nullable="false" />
+          <Property Name="IdRachunku" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Pozycje_Rachunki">
-          <End Role="Rachunki" Type="Self.Rachunki" Multiplicity="0..1" />
+          <End Role="Rachunki" Type="Self.Rachunki" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PozycjeNaRachunku" Type="Self.PozycjeNaRachunku" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Rachunki">
@@ -89,12 +110,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="pr_Raporty_Rachunki_Rachunki">
+          <End Role="Rachunki" Type="Self.Rachunki" Multiplicity="1" />
+          <End Role="Raporty_Rachunki" Type="Self.Raporty_Rachunki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rachunki">
+              <PropertyRef Name="IdRachunku" />
+            </Principal>
+            <Dependent Role="Raporty_Rachunki">
+              <PropertyRef Name="IdRachunku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pr_Raporty_Rachunki_Raporty">
+          <End Role="Raporty" Type="Self.Raporty" Multiplicity="1" />
+          <End Role="Raporty_Rachunki" Type="Self.Raporty_Rachunki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Raporty">
+              <PropertyRef Name="IdRaportu" />
+            </Principal>
+            <Dependent Role="Raporty_Rachunki">
+              <PropertyRef Name="IdRaportu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BazaIOModelStoreContainer">
           <EntitySet Name="Kasjer" EntityType="Self.Kasjer" Schema="1468_IO" store:Type="Tables" />
           <EntitySet Name="Kierownik" EntityType="Self.Kierownik" Schema="1468_IO" store:Type="Tables" />
           <EntitySet Name="PozycjeNaRachunku" EntityType="Self.PozycjeNaRachunku" Schema="1468_IO" store:Type="Tables" />
           <EntitySet Name="Promocja" EntityType="Self.Promocja" Schema="1468_IO" store:Type="Tables" />
           <EntitySet Name="Rachunki" EntityType="Self.Rachunki" Schema="1468_IO" store:Type="Tables" />
+          <EntitySet Name="Raporty" EntityType="Self.Raporty" Schema="1468_IO" store:Type="Tables" />
+          <EntitySet Name="Raporty_Rachunki" EntityType="Self.Raporty_Rachunki" store:Type="Tables" store:Schema="1468_IO">
+            <DefiningQuery>SELECT 
+    [Raporty_Rachunki].[IdRaportu] AS [IdRaportu], 
+    [Raporty_Rachunki].[IdRachunku] AS [IdRachunku]
+    FROM [1468_IO].[Raporty_Rachunki] AS [Raporty_Rachunki]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Pozycje_Rachunki" Association="Self.FK_Pozycje_Rachunki">
             <End Role="Rachunki" EntitySet="Rachunki" />
             <End Role="PozycjeNaRachunku" EntitySet="PozycjeNaRachunku" />
@@ -106,6 +158,14 @@
           <AssociationSet Name="FK_Rachunki_Kasjer" Association="Self.FK_Rachunki_Kasjer">
             <End Role="Kasjer" EntitySet="Kasjer" />
             <End Role="Rachunki" EntitySet="Rachunki" />
+          </AssociationSet>
+          <AssociationSet Name="pr_Raporty_Rachunki_Rachunki" Association="Self.pr_Raporty_Rachunki_Rachunki">
+            <End Role="Rachunki" EntitySet="Rachunki" />
+            <End Role="Raporty_Rachunki" EntitySet="Raporty_Rachunki" />
+          </AssociationSet>
+          <AssociationSet Name="pr_Raporty_Rachunki_Raporty" Association="Self.pr_Raporty_Rachunki_Raporty">
+            <End Role="Raporty" EntitySet="Raporty" />
+            <End Role="Raporty_Rachunki" EntitySet="Raporty_Rachunki" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -129,6 +189,11 @@
           <AssociationSet Name="FK_Pozycje_Rachunki" Association="BazaIOModel.FK_Pozycje_Rachunki">
             <End Role="Rachunki" EntitySet="Rachunkis" />
             <End Role="PozycjeNaRachunku" EntitySet="PozycjeNaRachunkus" />
+          </AssociationSet>
+          <EntitySet Name="Raporties" EntityType="BazaIOModel.Raporty" />
+          <AssociationSet Name="Raporty_Rachunki" Association="BazaIOModel.Raporty_Rachunki">
+            <End Role="Rachunki" EntitySet="Rachunkis" />
+            <End Role="Raporty" EntitySet="Raporties" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Kasjer">
@@ -184,6 +249,7 @@
           <Property Name="DataRachunku" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Kasjer" Relationship="BazaIOModel.FK_Rachunki_Kasjer" FromRole="Rachunki" ToRole="Kasjer" />
           <NavigationProperty Name="PozycjeNaRachunkus" Relationship="BazaIOModel.FK_Pozycje_Rachunki" FromRole="Rachunki" ToRole="PozycjeNaRachunku" />
+          <NavigationProperty Name="Raporties" Relationship="BazaIOModel.Raporty_Rachunki" FromRole="Rachunki" ToRole="Raporty" />
         </EntityType>
         <Association Name="FK_Rachunki_Kasjer">
           <End Type="BazaIOModel.Kasjer" Role="Kasjer" Multiplicity="0..1" />
@@ -220,6 +286,20 @@
               <PropertyRef Name="IdRachunku" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Raporty">
+          <Key>
+            <PropertyRef Name="IdRaportu" />
+          </Key>
+          <Property Name="IdRaportu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Suma" Type="Double" />
+          <Property Name="DataOd" Type="DateTime" Precision="3" />
+          <Property Name="DataDo" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Rachunkis" Relationship="BazaIOModel.Raporty_Rachunki" FromRole="Raporty" ToRole="Rachunki" />
+        </EntityType>
+        <Association Name="Raporty_Rachunki">
+          <End Type="BazaIOModel.Rachunki" Role="Rachunki" Multiplicity="*" />
+          <End Type="BazaIOModel.Raporty" Role="Raporty" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -280,6 +360,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Raporties">
+            <EntityTypeMapping TypeName="BazaIOModel.Raporty">
+              <MappingFragment StoreEntitySet="Raporty">
+                <ScalarProperty Name="DataDo" ColumnName="DataDo" />
+                <ScalarProperty Name="DataOd" ColumnName="DataOd" />
+                <ScalarProperty Name="Suma" ColumnName="Suma" />
+                <ScalarProperty Name="IdRaportu" ColumnName="IdRaportu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Raporty_Rachunki" TypeName="BazaIOModel.Raporty_Rachunki" StoreEntitySet="Raporty_Rachunki">
+            <EndProperty Name="Raporty">
+              <ScalarProperty Name="IdRaportu" ColumnName="IdRaportu" />
+            </EndProperty>
+            <EndProperty Name="Rachunki">
+              <ScalarProperty Name="IdRachunku" ColumnName="IdRachunku" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

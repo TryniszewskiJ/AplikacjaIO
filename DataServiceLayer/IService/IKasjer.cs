@@ -9,8 +9,6 @@ namespace DataServiceLayer.IService
 {
     public interface IKasjer
     {
-        void AktywacjaRabatu();
-        void ObslugaRachunku();
         LoginModel Autoruzacja(Models.View.LoginModel model);
     }
 }
