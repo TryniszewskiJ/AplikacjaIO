@@ -8,11 +8,11 @@ namespace DataServiceLayer.Models.View
 {
     public class LoginModel
     {
-        [Required(ErrorMessage = "Title is required.")]
+        [Required(ErrorMessage = "Login jest wymagany.")]
         [Display(Name = "Login")]
         [MaxLength(10)]
         public string Login { get; set; }
-        [Required(ErrorMessage = "Title is required.")]
+        [Required(ErrorMessage = "Haslo jest wymagane.")]
         [Display(Name = "Hasło")]
         [MaxLength(10)]
         [DataType(DataType.Password)]

@@ -1,36 +1,16 @@
-﻿@*@model DataServiceLayer.Models.View.LoginModel
-@{
-    ViewBag.Title = "Kierownik";
-}
-
-<h2>Kierownik</h2>
-@using (Html.BeginForm("Kierownik", "Login", FormMethod.Post))
-{
-    <div>
-        @Html.LabelFor(c => c.Login)
-        @Html.ValidationMessageFor(model => model.Login)
-    </div>
-    <div>
-        @Html.EditorFor(Model => Model.Login)
-    </div>
-    <div>
-        @Html.LabelFor(c => c.Haslo)
-        @Html.ValidationMessageFor(model => model.Haslo)
-    </div>
-    <div>
-        @Html.PasswordFor(Model => Model.Haslo)
-    </div>
-    <input type="submit" value="Sign In">
-}*@
-
-
-
-@model DataServiceLayer.Models.View.LoginModel
+﻿@model DataServiceLayer.Models.View.LoginModel
 
 
 
 @using (Html.BeginForm("Kierownik", "Login", FormMethod.Post))
 {
+    //w tym ifie wyswietla sie informacja o bledzie
+    if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <div class="text-danger">
+            @ViewBag.Error
+        </div>
+    }
     @Html.AntiForgeryToken()
     <div class="container">
         <div class="row" style="margin-top:2.5%">

@@ -1,36 +1,16 @@
-﻿@*@model DataServiceLayer.Models.View.LoginModel*@
-@*@{
-    ViewBag.Title = "Kasjer";
-}
-
-<h2>Kasjer</h2>
-@using (Html.BeginForm("Kasjer", "Login", FormMethod.Post))
-{
-    <div>
-        @Html.LabelFor(c => c.Login, htmlAttributes: new { @class = "control-label labelIntro" })
-        @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
-    </div>
-    <div>
-        @Html.EditorFor(Model => Model.Login, new { htmlAttributes = new { @class = "form-control intro-input", @placeholder = "wprowadź swoje imię" } })
-    </div>
-    <div>
-        @Html.LabelFor(c => c.Haslo, htmlAttributes: new { @class = "control-label labelIntro" })
-        @Html.ValidationMessageFor(model => model.Haslo, "", new { @class = "text-danger" })
-    </div>
-    <div>
-        @Html.PasswordFor(Model => Model.Haslo, new { htmlAttributes = new { @class = "form-control intro-input", @placeholder = "wprowadź swoje imię" } })
-    </div>
-    <input type="submit" value="Sign In">
-}*@
-
-
-
-@model DataServiceLayer.Models.View.LoginModel
+﻿@model DataServiceLayer.Models.View.LoginModel
 
 
 
 @using (Html.BeginForm("Kasjer", "Login", FormMethod.Post))
 {
+    //w tym ifie wyswietla sie informacja o bledzie
+    if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <div class="text-danger">
+            @ViewBag.Error
+        </div>
+    }
     @Html.AntiForgeryToken()
     <div class="container">
         <div class="row" style="margin-top:2.5%">

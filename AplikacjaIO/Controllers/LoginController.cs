@@ -50,6 +50,8 @@ namespace AplikacjaIO.Controllers
             }
             else
             {
+                if (!string.IsNullOrEmpty(model.Login) && !(string.IsNullOrEmpty(model.Haslo)))
+                    ViewBag.Error = "Nie poprawny login lub hasło";
                 return View();
             }
         }
@@ -77,6 +79,8 @@ namespace AplikacjaIO.Controllers
             }
             else
             {
+                if (!string.IsNullOrEmpty(model.Login) && !(string.IsNullOrEmpty(model.Haslo)))
+                    ViewBag.Error = "Nie poprawny login lub hasło";
                 return View();
             }
         }
