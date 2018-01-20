@@ -193,6 +193,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuUzytkownikaController.cs" />
     <Compile Include="Controllers\PromocjeController.cs" />
+    <Compile Include="Controllers\RachunkiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -295,6 +296,8 @@
     <Content Include="Views\MenuUzytkownika\Kierownik.cshtml" />
     <Content Include="Views\Promocje\Index.cshtml" />
     <Content Include="Views\Promocje\Wprowadz.cshtml" />
+    <Content Include="Views\Rachunki\Index.cshtml" />
+    <Content Include="Views\Rachunki\Zobacz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

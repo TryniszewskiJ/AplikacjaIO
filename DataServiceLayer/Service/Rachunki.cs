@@ -47,7 +47,13 @@ namespace DataServiceLayer.Service
 
         public void Usun(int IdRachunku)
         {
+            using (DataBase context = new DataBase())
+            {
+                var rachunek = context.Rachunkis.SingleOrDefault(c => c.IdRachunku == IdRachunku);
 
+                context.Rachunkis.Remove(rachunek);
+                context.SaveChanges();
+            }
         }
 
         public List<RachunkiModel> GetRachunkiList()
@@ -67,6 +73,35 @@ namespace DataServiceLayer.Service
                     });
                 }
                 return toList;
+            }
+        }
+
+        public RachunkiModel GetRachunek(int IdRachunku)
+        {
+            using (DataBase context = new DataBase())
+            {
+                var rachunek = context.Rachunkis.SingleOrDefault(c => c.IdRachunku == IdRachunku);
+                RachunkiModel model = new RachunkiModel
+                {
+                    IdRachunku = rachunek.IdRachunku,
+                    DataRachunku = rachunek.DataRachunku.Value,
+                    Wysokosc = rachunek.wysokoscRachunku.Value,
+                    IdKasjera = rachunek.IdRachunku,
+                    NazwaKasjera = rachunek.Kasjer.imie + " " + rachunek.Kasjer.nazwisko,
+                    Sklad = new List<PozycjeModel>()
+                };
+                foreach(var pozycja in rachunek.PozycjeNaRachunkus)
+                {
+                    model.Sklad.Add(new PozycjeModel
+                    {
+                        Cena = pozycja.Cena.Value,
+                        IdPozycji = pozycja.IdPozycji,
+                        IdRachunku = pozycja.IdRachunku.Value,
+                        Ilosc = pozycja.Ilosc.Value
+                    });
+                }
+
+                return model;
             }
         }
 

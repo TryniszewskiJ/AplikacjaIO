@@ -1,0 +1,48 @@
+﻿@model DataServiceLayer.Models.View.RachunkiModel
+@{
+    ViewBag.Title = "Zobacz";
+}
+
+<h2>Zobacz</h2>
+
+<div>
+    @Html.LabelFor(c => c.IdRachunku)
+</div>
+<div>@Html.DisplayFor(c => c.IdRachunku)</div>
+<div>
+    @Html.LabelFor(c => c.Wysokosc)
+</div>
+<div>@Html.DisplayFor(c => c.Wysokosc)</div>
+<div>
+    @Html.LabelFor(c => c.DataRachunku)
+</div>
+<div>@Html.DisplayFor(c => c.DataRachunku)</div>
+<div>
+    @Html.LabelFor(c => c.NazwaKasjera)
+</div>
+<div>@Html.DisplayFor(c => c.NazwaKasjera)</div>
+
+<div>
+    sklad
+</div>
+<table>
+    <tr>
+        <td>
+            @Html.LabelFor(c => c.Sklad.FirstOrDefault().Ilosc)
+        </td>
+        <td>
+            @Html.LabelFor(c => c.Sklad.FirstOrDefault().Cena)
+        </td>
+    </tr>
+    @for(int i =0;i<Model.Sklad.Count;i++)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(c => c.Sklad[i].Ilosc)
+            </td>
+            <td>
+                @Html.DisplayFor(c => c.Sklad[i].Cena)
+            </td>
+        </tr>
+    }
+</table>

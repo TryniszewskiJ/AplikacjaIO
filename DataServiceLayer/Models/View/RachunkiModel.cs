@@ -8,10 +8,15 @@ namespace DataServiceLayer.Models.View
 {
     public class RachunkiModel
     {
+        [Display(Name = "Numer rachunku")]
         public int IdRachunku { get; set; }
         [Display(Name = "Wysokosc rachunku")]
         public double Wysokosc { get; set; }
         public int IdKasjera { get; set; }
+        [Display(Name = "Data Rachunku")]
+        public DateTime DataRachunku { get; set; }
+        [Display(Name = "Kto wystawil")]
+        public string NazwaKasjera { get; set; }
         public List<PozycjeModel> Sklad { get; set; }
     }
 
@@ -19,7 +24,7 @@ namespace DataServiceLayer.Models.View
     {
         public int IdPozycji { get; set; }
         public int IdRachunku { get; set; }
-        public float Cena { get; set; }
-        public float Ilosc { get; set; }
+        public double Cena { get; set; }
+        public double Ilosc { get; set; }
     }
 }

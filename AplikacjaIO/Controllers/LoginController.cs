@@ -84,5 +84,12 @@ namespace AplikacjaIO.Controllers
                 return View();
             }
         }
+
+        [Authorize]
+        public ActionResult LogOut()
+        {
+            HttpContext.GetOwinContext().Authentication.SignOut();
+            return RedirectToAction("Index","Home");
+        }
     }
 }

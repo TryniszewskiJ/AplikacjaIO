@@ -12,5 +12,6 @@ namespace DataServiceLayer.IService
         RachunkiModel Dodaj(RachunkiModel model, int IdKasjer);
         void Usun(int IdRachunku);
         List<RachunkiModel> GetRachunkiList();
+        RachunkiModel GetRachunek(int IdRachunku);
     }
 }
