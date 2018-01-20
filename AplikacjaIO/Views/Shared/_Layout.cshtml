@@ -40,18 +40,40 @@
 
             <div id="nav2" class="test2 collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    @if ((System.Web.HttpContext.Current.User != null) && (System.Web.HttpContext.Current.User.Identity.IsAuthenticated))
-                    {
-                        <li>
-                            <a href="/home/index">Wyloguj</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li>
-                            <a href="/home/index">Zaloguj</a>
-                        </li>
-                    }
+                       @if ((System.Web.HttpContext.Current.User != null) && (System.Web.HttpContext.Current.User.Identity.IsAuthenticated))
+                       {
+                    
+                               if (((System.Security.Claims.ClaimsPrincipal)User).FindFirst(System.Security.Claims.ClaimTypes.Role).Value == "Kasjer")
+                               {
+                                   //elementy dla kasjera w navbarze
+                          
+                                <li>
+                                    <a href="/home/index">Rachunki</a>
+                                </li>
+                         
+                               }
+                               else
+                               {
+                                <li>
+                                    <a href="/promocje/index">Promocje</a>
+                                </li>
+                                <li>
+                                    <a href="/home/index">Rachunki</a>
+                                </li>
+                                <li>
+                                    <a href="/home/index">Raporty</a>
+                                </li>
+                               }
+                           <li>
+                             <a href="/home/index">Wyloguj</a>
+                           </li>
+                       }
+                       else
+                       {
+                           <li>
+                              <a href="/home/index">Zaloguj</a>
+                           </li>
+                       }
                 </ul>
             </div>
         </div>

@@ -59,7 +59,7 @@ namespace AplikacjaIO.Controllers
             ViewBag.czyPost = true;
             model = _promocja.Edycja(model);
             ViewBag.Status = true;
-            return View();
+            return View("Wprowadz", model);
         }
 
         [HttpGet]

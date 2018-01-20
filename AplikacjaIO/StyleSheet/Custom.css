@@ -717,7 +717,12 @@ input[type=range] {
         margin-top: 15px;
     }
 }
-
+@media screen and (max-width: 768px) {
+    .TextMove .moveText {
+        margin-top: -5px;
+        left: 0px;
+    }
+}
 @media screen and (max-width: 575px) {
     #site-description {
         top: 0;
@@ -1019,4 +1024,13 @@ input[type=range] {
 }
 #Txtar {
     resize: none;
+}
+.KasjerKierownik{
+    color: black;
+    text-decoration:none;
+    
+}
+.moveText a:hover {
+    color: #ffc04c;
+    text-decoration: none;
 }

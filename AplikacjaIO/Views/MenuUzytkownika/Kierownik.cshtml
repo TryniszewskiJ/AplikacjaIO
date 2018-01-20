@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <div class="row marg400200" >
+        <div class="row marg400200 TextMove" >
             <div class="col-1">
                 <div class="numberCircle">
                     1
@@ -63,11 +63,11 @@
             </div>
 
             <div class="col-11 moveText">
-                <strong>
+                
                     <span>
-                        Zarządzaj promocjami
+                        <strong>@Html.ActionLink("Zarządzaj Promocjami!", "Index", "Promocje", null, new { @class = "KasjerKierownik" })</strong>
                     </span>
-                </strong>
+               
                 <br />
                 <span>
                     Tutaj możesz zarządzać wszystkim promocjami dodawać nowe, edytować lub usuwać już istniejące.
@@ -75,7 +75,7 @@
             </div>
         </div>
 
-        <div class="row pad70bot mar-top50">
+        <div class="row marg400200 TextMove">
             <div class="col-1">
                 <div class="numberCircle">
                     2
@@ -83,11 +83,31 @@
             </div>
 
             <div class="col-11 moveText">
-                <strong>
+              
                     <span>
-                        Zarządzaj raportami
+                        <strong>@Html.ActionLink("Zarządzaj Rachunkami!", "rachunek", "rachunek", null, new { @class = "KasjerKierownik" })</strong>
                     </span>
-                </strong>
+              
+                <br />
+                <span>
+                    Tutaj możesz zarządzać wszystkimi raportami dodawać nowe, przeglądać, edytować, usuwać lub drukowac istniejące
+                </span>
+            </div>
+        </div>
+
+        <div class="row pad70bot marg400200 TextMove">
+            <div class="col-1">
+                <div class="numberCircle">
+                    3
+                </div>
+            </div>
+
+            <div class="col-11 moveText">
+              
+                    <span>
+                        <strong>@Html.ActionLink("Zarządzaj Raportami!", "raport", "raport", null, new { @class = "KasjerKierownik" })</strong>
+                    </span>
+               
                 <br />
                 <span>
                     Tutaj możesz zarządzać wszystkimi raportami dodawać nowe, przeglądać, edytować, usuwać lub drukowac istniejące

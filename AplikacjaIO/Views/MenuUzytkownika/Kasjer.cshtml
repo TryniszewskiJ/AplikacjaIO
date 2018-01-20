@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <div class="row marg400200 pad70bot">
+        <div class="row marg400200 pad70bot TextMove">
             <div class="col-1">
                 <div class="numberCircle">
                     1
@@ -63,11 +63,11 @@
             </div>
 
             <div class="col-11 moveText">
-                <strong>
+               
                     <span>
-                        Zarządzaj rachunkami
+                        <strong>@Html.ActionLink("Zarządzaj Rachunkami!", "rachunek", "rachunek", null, new { @class = "KasjerKierownik" })</strong>
                     </span>
-                </strong>
+               
                 <br />
                 <span>
                     Tutaj możesz stworzyć nowy rachunek.
