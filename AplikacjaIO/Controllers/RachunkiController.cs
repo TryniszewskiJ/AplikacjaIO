@@ -48,5 +48,9 @@ namespace AplikacjaIO.Controllers
             _rachunki.Usun(IdRachunku);
             return View("Index");
         }
+        public ActionResult Wybierz()
+        {
+            return View();
+        }
     }
 }

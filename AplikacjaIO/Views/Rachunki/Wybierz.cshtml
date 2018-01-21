@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Wybierz";
+}
+@using (Html.BeginForm("Zobacz", "Rachunki", FormMethod.Get))
+{
+
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12" style="margin-top:4.5%;text-align:center">
+                    <h3>Wybierz rachunek do podglądu!</h3>
+                </div>
+            </div>
+            <div class="jumbotron" style="margin-top:4.5%">
+                <div class="row">
+                    <div class="col-12" style="margin-top:4.5%;text-align:center">
+                        <h2>Podaj ID Rachunku!</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div style="text-align:center">
+                        @*@Html.TextBox("IdRachunku", "", new { @class = "form-control", @id = "IdRachunku" })*@
+                            <input type="text" class="form-control" name="IdRachunku" id="IdRachunku" style="display:inline"/>
+                        </div>
+            
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-12" style="text-align:center">
+                        <button type="submit" class="btn btn-primary">Zobacz</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+}
+
+

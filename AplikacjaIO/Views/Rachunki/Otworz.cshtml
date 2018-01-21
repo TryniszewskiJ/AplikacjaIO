@@ -149,8 +149,6 @@
             //$(r).attr('id', 'poz');
             $(r).insertAfter("td:last")
             var len = rows.length-2;
-            alert(rows.length);
-            alert("#poz" + len)
             $('#poz' + len).removeClass('btn btn-primary');
             $('#poz' + len).attr('value', 'Usuń');
             $('#poz' + len).attr('onclick', '').unbind('click');
