@@ -5,7 +5,7 @@
 
 @{
     string akcja = "Wprowadz";
-   
+
     if (ViewBag.czyEdycja == true)
     {
         akcja = "Edytuj";
@@ -88,7 +88,7 @@
                                 <strong>@Html.LabelFor(Model => Model.NazwaPromocji, htmlAttributes: new { @class = "control-label labelIntro" })</strong>
                             </div>
                             <div class="col-md-3 col-12">
-                                @Html.EditorFor(Model => Model.NazwaPromocji, new { htmlAttributes = new { @class = "form-control intro-input"} })
+                                @Html.EditorFor(Model => Model.NazwaPromocji, new { htmlAttributes = new { @class = "form-control intro-input" } })
                                 @Html.ValidationMessageFor(model => model.NazwaPromocji, "", new { @class = "text-danger" })
                             </div>
                     </div>
@@ -98,8 +98,11 @@
                             <strong>@Html.LabelFor(Model => Model.DataWdrozenia, htmlAttributes: new { @class = "control-label labelIntro" })</strong>
                         </div>
                         <div class="col-md-3 col-12">
-                            @Html.EditorFor(Model => Model.DataWdrozenia, new { htmlAttributes = new { @class = "form-control intro-input" } })
-                            @Html.ValidationMessageFor(model => model.DataWdrozenia, "", new { @class = "text-danger" })
+                            <div class="input-group" >
+                                @Html.EditorFor(Model => Model.DataWdrozenia, new { htmlAttributes = new { @class = "form-control intro-input " , @id="datepicker" } })
+                                <i class="fa fa-calendar" style="font-size:35px" aria-hidden="true"></i>
+                                @Html.ValidationMessageFor(model => model.DataWdrozenia, "", new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
 
@@ -109,14 +112,14 @@
                             @Html.ValidationMessageFor(model => model.OpisPromocji)
                         </div>
                         <div class="col-md-3 col-12">
-                            @Html.EditorFor(Model => Model.OpisPromocji, new { htmlAttributes = new { @class = "form-control intro-input", rows = "3", id="Txtar"} })
+                            @Html.EditorFor(Model => Model.OpisPromocji, new { htmlAttributes = new { @class = "form-control intro-input", rows = "3", id = "Txtar" } })
                             @Html.ValidationMessageFor(model => model.OpisPromocji, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
             </div>
-    if (Model != null)
-    {
+        if (Model != null)
+        {
         <div class="container-fluid">
             <div class="container">
                 <div class="row">
@@ -128,10 +131,10 @@
             </div>
         </div>
             @*<input type="submit" value="Zapisz zmiany">*@
-        //button do usuniecia
-    }
-    else
-    {
+            //button do usuniecia
+        }
+        else
+        {
         <div class="container-fluid">
             <div class="container">
                 <div class="row">
@@ -141,7 +144,29 @@
                 </div>
             </div>
         </div>
+        
+        }
+
+
     }
 }
-
-}
+    @section Scripts {
+       
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.standalone.min.cssdate" />
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#datepicker').datepicker({
+                    orientation: "bottom",
+                    
+                });
+                
+            });
+           
+        </script>
+    }

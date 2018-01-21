@@ -1034,3 +1034,6 @@ input[type=range] {
     color: #ffc04c;
     text-decoration: none;
 }
+.ui-datepicker {
+    width: 1000px; /*what ever width you want*/
+}

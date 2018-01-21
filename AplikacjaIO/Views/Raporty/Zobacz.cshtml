@@ -3,7 +3,7 @@
     ViewBag.Title = "Zobacz";
 }
 
-<h2>Zobacz</h2>
+@*<h2>Zobacz</h2>
 
 <div>
     @Html.LabelFor(c => c.IdRaportu)
@@ -67,4 +67,89 @@
             </td>
         </tr>
     }
-</table>
+</table>*@
+
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-12" style="margin-top:4.5%;margin-bottom:3%;text-align:center">
+                <h3>Raport!</h3>
+            </div>
+        </div>
+        <div class="row" style="border-bottom:1px solid black">
+            <div class="col-3" style="border-right:1px solid black;border-left:1px solid black;text-align:center">
+                <strong style="font-size:20px;">@Html.LabelFor(model => model.IdRaportu)</strong>
+            </div>
+            <div class="col-3" style="border-right:1px solid black;text-align:center">
+                <strong style="font-size:20px;">@Html.LabelFor(model => model.Suma)</strong>
+            </div>
+            <div class="col-3" style="border-right:1px solid black;text-align:center">
+                <strong style="font-size:20px;">@Html.LabelFor(model => model.DataOd)</strong>
+            </div>
+            <div class="col-3" style="border-right:1px solid black;text-align:center">
+                <strong style="font-size:20px;">@Html.LabelFor(model => model.DataDo)</strong>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-3" style="text-align:center;font-size:20px">
+                @Html.DisplayFor(model => model.IdRaportu, new { htmlAttributes = new { @class = "form-control intro-input" } })
+            </div>
+
+            <div class="col-3" style="text-align:center;font-size:20px">
+                @Html.DisplayFor(model => model.Suma, new { htmlAttributes = new { @class = "form-control intro-input" } })
+            </div>
+
+            <div class="col-3" style="text-align:center;font-size:20px">
+                @Html.DisplayFor(model => model.DataDo, new { htmlAttributes = new { @class = "form-control intro-input" } })
+            </div>
+
+            <div class="col-3" style="text-align:center;font-size:20px">
+                @Html.DisplayFor(model => model.DataDo, new { htmlAttributes = new { @class = "form-control intro-input" } })
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid" style="text-align:center;margin-top:20px;">
+    <div class="container">
+        <div class="row">
+            <table style="border:1px solid black">
+                <tr style="border:1px solid black">
+                    <td style="width:30%;border:1px solid black">
+                        <strong style="font-size:20px;">@Html.LabelFor(model => model.RachunkiNaRaporcie.FirstOrDefault().IdRachunku)</strong>
+                    </td>
+                    <td style="width:30%;border:1px solid black">
+                        <strong style="font-size:20px;">@Html.LabelFor(model => model.RachunkiNaRaporcie.FirstOrDefault().Wysokosc)</strong>
+                    </td>
+                    <td style="width:30%;border:1px solid black">
+                        <strong style="font-size:20px;">@Html.LabelFor(model => model.RachunkiNaRaporcie.FirstOrDefault().DataRachunku)</strong>
+                    </td>
+                    <td style="width:30%;border:1px solid black">
+                        <strong style="font-size:20px;">@Html.LabelFor(model => model.RachunkiNaRaporcie.FirstOrDefault().NazwaKasjera)</strong>
+                    </td>
+                </tr>
+                @for (int i = 0; i < Model.RachunkiNaRaporcie.Count; i++)
+                {
+                    <tr style="border:1px solid black">
+                        <td style="width:30%;border:1px solid black">
+                            @Html.DisplayFor(model => model.RachunkiNaRaporcie.FirstOrDefault().IdRachunku, new { htmlAttributes = new { @class = "form-control intro-input" } })
+                        </td>
+                        <td style="width:30%;border:1px solid black">
+                            @Html.DisplayFor(model => model.RachunkiNaRaporcie.FirstOrDefault().Wysokosc, new { htmlAttributes = new { @class = "form-control intro-input" } })
+                        </td>
+                        <td style="width:30%;border:1px solid black">
+                            @Html.DisplayFor(model => model.RachunkiNaRaporcie.FirstOrDefault().DataRachunku, new { htmlAttributes = new { @class = "form-control intro-input" } })
+                        </td>
+                        <td style="width:30%;border:1px solid black">
+                            @Html.DisplayFor(model => model.RachunkiNaRaporcie.FirstOrDefault().NazwaKasjera, new { htmlAttributes = new { @class = "form-control intro-input" } })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+</div>
