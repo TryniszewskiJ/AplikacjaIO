@@ -4,8 +4,8 @@
 }
 
 <h2>Otworz</h2>
-@*@using (Html.BeginForm("", "", FormMethod.Post))
-    {*@
+@using (Html.BeginForm("", "", FormMethod.Post))
+    {
 <div class="container-fluid" style="background-color:#dadada">
     <div class="container">
         <div class="row">
@@ -38,7 +38,7 @@
                 </td>
 
                 <td>
-                    <button></button>
+                    <button type="button"></button>
                 </td>
 
             </tr>
@@ -60,7 +60,7 @@
     </div>
 </div>
 
-@*}*@
+}
 @section Scripts {
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -83,8 +83,8 @@
 
             if ("tr:last") {
                 $('button').addClass("btn btn-primary");
-                $('button').attr("id", 'poz');
-                $('button').html('Dodaj pozycję');
+                $('button').attr("id", 'poz1');
+                $('button').html('Usuń');
 
 
             }
@@ -139,19 +139,23 @@
            var c = $('<input type="text" placeholder="Cena" class="form-control" id="cena' + (rows.length - 1) + '"/>')
             $('select').replaceWith($(c));
             $('<tr><td>' + rows.length + "</td></tr>").insertAfter("tr:last");
-            var r = $('<td class="center"><input type="button" id="poz' + (rows.length - 1) + '"  onClick="myFun()" class="btn btn-primary" value="Dodaj pozycję"/></td>');
+            var r = $('<td><input type="button" id="poz' + (rows.length - 1) + '"  onClick="myFun()" class="btn btn-primary" value="Dodaj pozycję"/></td>');
             var v = $('<td><select id="sel" class=form-control><option value=1>Brak Rabatu</option><option value=30>Studencki</option><option value=25>Wieczorna</option></select></td>');
-            var w = $('<td><input type="text" value="0" name="masa" id="waga' + (rows.length - 1) + '"  class="form-control waga " " /></td>')
+            var w = $('<td><input type="text" value="0" name="masa" id="waga' + (rows.length - 1) + '"  class="form-control waga" " /></td>')
 
             $(w).insertAfter("td:last");
             $(w).addClass("waga");
             $(v).insertAfter("td:last");
-            $(r).attr('id', 'poz');
+            //$(r).attr('id', 'poz');
             $(r).insertAfter("td:last")
-            $('#poz').removeClass('btn btn-primary');
-            $('#poz').addClass('btn btn-danger btn-block');
-            $('#poz').html('Usuń')
-            $('#poz').removeAttr('id');
+            var len = rows.length-2;
+            alert(rows.length);
+            alert("#poz" + len)
+            $('#poz' + len).removeClass('btn btn-primary');
+            $('#poz' + len).attr('value', 'Usuń');
+            $('#poz' + len).attr('onclick', '').unbind('click');
+            $('#poz' + len).addClass('btn btn-danger btn-block');
+            
 
 
 
