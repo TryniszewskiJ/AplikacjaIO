@@ -21,7 +21,7 @@ namespace AplikacjaIO.Controllers
         public ActionResult Index()
         {
             var model = _raporty.GetRaportList();
-            return View();
+            return View(model);
         }
 
         [HttpGet]

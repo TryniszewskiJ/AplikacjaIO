@@ -21,33 +21,50 @@ namespace DataServiceLayer.Service
     {
         public bool Usun(int IdPromocji)
         {
-            using (DataBase context = new DataBase())
+            try
             {
-                var doUsuniecia = context.Promocjas.SingleOrDefault(c => c.promocjaID == IdPromocji);
-                if(doUsuniecia != null)
+                using (DataBase context = new DataBase())
                 {
-                    context.Promocjas.Remove(doUsuniecia);
+                    var doUsuniecia = context.Promocjas.SingleOrDefault(c => c.promocjaID == IdPromocji);
+                    if (doUsuniecia != null)
+                    {
+                        context.Promocjas.Remove(doUsuniecia);
+                        context.SaveChanges();
+                        return true;
+                    }
+                    return false;
                 }
             }
-            return true;
+            catch
+            {
+                return false;
+            }
+            
         }
 
         public PromocjeModel GetPromocje(int IdPromocji)
         {
-            using (DataBase context = new DataBase())
+            try
             {
-                var promocja = context.Promocjas.SingleOrDefault(c => c.promocjaID == IdPromocji);
-                if(promocja != null)
+                using (DataBase context = new DataBase())
                 {
-                    return new PromocjeModel
+                    var promocja = context.Promocjas.SingleOrDefault(c => c.promocjaID == IdPromocji);
+                    if (promocja != null)
                     {
-                        DataWdrozenia = promocja.DataWdrozenia,
-                        IDPromoca = promocja.promocjaID,
-                        NazwaPromocji = promocja.nazwaPromocji,
-                        OpisPromocji = promocja.opisPromocji
-                    };
+                        return new PromocjeModel
+                        {
+                            DataWdrozenia = promocja.DataWdrozenia,
+                            IDPromoca = promocja.promocjaID,
+                            NazwaPromocji = promocja.nazwaPromocji,
+                            OpisPromocji = promocja.opisPromocji
+                        };
+                    }
+                    return null;
                 }
-                return null;              
+            }
+            catch
+            {
+                return null;
             }
         }
 
@@ -66,22 +83,32 @@ namespace DataServiceLayer.Service
 
         public PromocjeModel Wprowadz(PromocjeModel model)
         {
-            using (DataBase context = new DataBase())
+            try
             {
-                var kierownik = context.Kierowniks.SingleOrDefault(c => c.kierownikID == model.IdKierownika);
-                DataBaseLayer.Promocja promocja = new DataBaseLayer.Promocja
+                using (DataBase context = new DataBase())
                 {
-                    DataWdrozenia = model.DataWdrozenia,
-                    nazwaPromocji = model.NazwaPromocji,
-                    opisPromocji = model.OpisPromocji,
-                    kierownikID = model.IdKierownika,
-                    Kierownik = kierownik
-                };
-                context.Promocjas.Add(promocja);
-                context.SaveChanges();
+                    var kierownik = context.Kierowniks.SingleOrDefault(c => c.kierownikID == model.IdKierownika);
+                    if(kierownik == null)
+                    {
+                        return null;
+                    }
+                    DataBaseLayer.Promocja promocja = new DataBaseLayer.Promocja
+                    {
+                        DataWdrozenia = model.DataWdrozenia,
+                        nazwaPromocji = model.NazwaPromocji,
+                        opisPromocji = model.OpisPromocji,
+                        kierownikID = model.IdKierownika,
+                        Kierownik = kierownik
+                    };
+                    context.Promocjas.Add(promocja);
+                    context.SaveChanges();
+                }
+                return model;
             }
-
-            return new PromocjeModel();
+            catch
+            {
+                return null;
+            }
         }
 
         public List<PromocjeModel> GetPromocjaList()

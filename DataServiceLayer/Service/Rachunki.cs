@@ -81,6 +81,10 @@ namespace DataServiceLayer.Service
             using (DataBase context = new DataBase())
             {
                 var rachunek = context.Rachunkis.SingleOrDefault(c => c.IdRachunku == IdRachunku);
+                if(rachunek ==  null)
+                {
+                    return null;
+                }
                 RachunkiModel model = new RachunkiModel
                 {
                     IdRachunku = rachunek.IdRachunku,

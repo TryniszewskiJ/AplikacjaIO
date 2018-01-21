@@ -32,6 +32,8 @@ namespace AplikacjaIO.Controllers
         [HttpPost]
         public ActionResult Zamknij(RachunkiModel rachunek)
         {
+            var d = Request.Form.AllKeys;
+            var c = Request.Form.Get("masa");
             return View();
         }
 
@@ -52,5 +54,6 @@ namespace AplikacjaIO.Controllers
         {
             return View();
         }
+
     }
 }
