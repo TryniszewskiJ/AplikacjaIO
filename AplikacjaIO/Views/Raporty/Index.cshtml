@@ -3,21 +3,20 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 <div class="container">
     <div class="row mar-top50">
         <table id="Promocje">
             <tr style="border-bottom:1px solid black;text-align:center;padding-bottom:10px;">
-                <td style="width:33.3333%;border-right:1px solid black">
+                <td style="width:23%;border-right:1px solid black">
                     <strong style="font-size:20px;">@Html.LabelFor(model => model.FirstOrDefault().IdRaportu)</strong>
                 </td>
-                <td style="width:33.3333%;border-right:1px solid black">
+                <td style="width:23%;border-right:1px solid black">
                     <strong style="font-size:20px;">@Html.LabelFor(model => model.FirstOrDefault().Suma)</strong>
                 </td>
-                <td style="width:33.3333%;border-right:1px solid black">
+                <td style="width:23%;border-right:1px solid black">
                     <strong style="font-size:20px;">@Html.LabelFor(model => model.FirstOrDefault().DataOd)</strong>
                 </td>
-                <td style="width:33.3333%;border-right:1px solid black">
+                <td style="width:23%;border-right:1px solid black">
                     <strong style="font-size:20px;">@Html.LabelFor(model => model.FirstOrDefault().DataDo)</strong>
                 </td>
                 <td></td>
@@ -25,7 +24,7 @@
             @for (int i = 0; i < Model.Count; i++)
             {
                 <tr class="spacer"></tr>
-                <tr style="text-align:center;border-top:1px solid black;">
+                <tr style="text-align:center;border-top:1px solid black;border-bottom: 1px solid black">
                     <td style="padding-top:10px;padding-bottom:10px;">
                         @Html.DisplayFor(model => model[i].IdRaportu, new { htmlAttributes = new { @class = "form-control intro-input" } })
                     </td>
@@ -39,11 +38,18 @@
                         @Html.DisplayFor(model => model[i].DataDo, new { htmlAttributes = new { @class = "form-control intro-input" } })
                     </td>
                     <td style="padding-top:10px;padding-bottom:10px;">
-                        @Html.ActionLink("Usun", "Usun", "Raporty", new { IdPromocji = Model[i].IdRaportu }, new { @class = "btn btn-danger btn-block" })
+                        @Html.ActionLink("Usuń", "Usun", "Raporty", new { IdRaportu = Model[i].IdRaportu }, new { @class = "btn btn-danger btn-block" })
+                        @Html.ActionLink("Zobacz", "Zobacz", "Raporty", new { IdRaportu = Model[i].IdRaportu }, new { @class = "btn btn-success btn-block" })
                         @*@Html.ActionLink("Edytuj", "Edytuj", "Raporty", new { IdPromocji = Model[i].IdRaportu }, new { @class = "btn btn-success" })*@
                     </td>
                 </tr>
             }
         </table>
+      
+    </div>
+    <div class="row mar-top50">
+        <div class="col-12">
+            @Html.ActionLink("Utwórz nowy", "Utworz", "Raporty", null, new { @class = "btn btn-primary" })
+        </div>
     </div>
 </div>

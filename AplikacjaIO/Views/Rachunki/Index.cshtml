@@ -3,7 +3,6 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 <div class="container">
     <div class="row mar-top50">
         <table id="Promocje">
@@ -34,7 +33,7 @@
                         </td>
                         <td style="padding-top:10px;padding-bottom:10px;">
                             <button class="btn btn-danger btn-block">Usuń</button> @*TRZEBA USUWANIE ZROBIC*@
-                            @Html.ActionLink("Edytuj", "Edytuj", "Promocje", new { IdPromocji = Model[i].IdRachunku }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Zobacz", "Zobacz", "Rachunki", new { IdRachunku = Model[i].IdRachunku }, new { @class = "btn btn-success" })
                         </td>
                     </tr>
             }

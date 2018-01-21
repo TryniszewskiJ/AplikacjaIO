@@ -13,7 +13,7 @@
                 <span style="font-size:36px"><strong>Rachunek!</strong></span>
             </div>
         </div>
-        <table>
+        <table id="table">
             <tr style="border-bottom:1px solid black;text-align:center;padding-bottom:10px;">
                 <td style="width:15%;border-right:1px solid black">
                     @*<strong style="font-size:20px;">@Html.LabelFor(model => model.FirstOrDefault().IdRachunku)</strong>*@
@@ -34,7 +34,7 @@
                 </td>
 
                 <td>
-                    <input type="text" placeholder="Cena" id="cena1" class="form-control" />
+                    <input type="text" placeholder="Cena" id="cena1" class="form-control" disabled/>
                 </td>
 
                 <td>
@@ -44,15 +44,21 @@
             </tr>
         </table>
         <div class="row">
-            <div class="col-12" style="float:right;">
+            <div class="col-12" style="">
+
                 <div class="row">
                     <div style="width:49.3333%">
 
                     </div>
-
-                    <div style="float:right;border-top:1px solid black">
-                        <span>Suma:</span>
-                        <input type="number" id="suma12" style="background-color:transparent;border:none;width:70px" value="0" disabled />zł
+                    <div class="col-2">
+                        <div style="border-top:1px solid black">
+                            <span>Suma:</span>
+                            <input type="number" id="suma12" style="background-color:transparent;border:none;width:70px" value="0" disabled />zł
+                            
+                        </div>
+                    </div>
+                    <div style="width:12%">
+                        <select id="sel" class=form-control><option value=1>Brak Rabatu</option><option value=30>Studencki</option><option value=25>Wieczorna</option></select>
                     </div>
                 </div>
             </div>
@@ -88,9 +94,43 @@
 
 
             }
-            $('#poz').on('click', myFun());
+            $('#poz').click(myFun());
+
+            $('body').on("click", ".usun", function () {
+                var ide = $(this).attr("id");
+                if (ide.length > 5) {
+                    var lastChar = ide.substr(ide.length - 2);
+
+                }
+                else if (ide.length > 6) {
+                    var lastChar = ide.substr(ide.length - 3);
+                }
+                else {
+                    var lastChar = ide.substr(ide.length - 1);
+                }
+                $('#tr' + lastChar).remove();
+                $('tr:gt(0) td:first-child').remove();
+                var tables = document.getElementsByTagName('table');
+                var table = tables[tables.length - 1];
+                var rows = table.rows;
+                for (var i = 0, td; i < rows.length; i++) {
+                    if (i != 0) {
+                        td = document.createElement('td');
+                        td.appendChild(document.createTextNode(i));
+                        rows[i].insertBefore(td, rows[i].firstChild);
+                        
+                    }
+                    $("tr:eq(" + i + ")").attr('id', "tr"+i);
+                }
+
+                var len = rows.length - 1;
+                $('.btn-primary').attr('id', 'poz' + len);
+
+               
+            });
 
             $("body").on("focusout", ".waga", function () {
+
                 var ide = $(this).attr("id");
                 var lastChar = ide.substr(ide.length - 1);
                 if (ide.length > 5) {
@@ -136,25 +176,36 @@
 
         });
         function myFun() {
-           var c = $('<input type="text" placeholder="Cena" class="form-control" id="cena' + (rows.length - 1) + '"/>')
-            $('select').replaceWith($(c));
-            $('<tr><td>' + rows.length + "</td></tr>").insertAfter("tr:last");
+            $("body").on('click', ".btn-primary", function () {
+                alert("jestem");
+                $(this).removeClass('btn btn-primary');
+                $(this).attr('value', 'Usuń');
+                $(this).attr('onclick', '').unbind('click');
+                $(this).attr('onclick', 'usun()').bind('click');
+                $(this).addClass('btn btn-danger btn-block usun');
+                $(this).attr('id', "usun" + (rows.length - 2))
+               
+            });
+            var c = $('<td><input type="text" placeholder="Cena" class="form-control" id="cena' + (rows.length) + '" disabled /></td>')
+           $('<tr id="tr' + (rows.length) + '" " ><td>' + rows.length + "</td></tr>").insertAfter("tr:last");
             var r = $('<td><input type="button" id="poz' + (rows.length - 1) + '"  onClick="myFun()" class="btn btn-primary" value="Dodaj pozycję"/></td>');
             var v = $('<td><select id="sel" class=form-control><option value=1>Brak Rabatu</option><option value=30>Studencki</option><option value=25>Wieczorna</option></select></td>');
             var w = $('<td><input type="text" value="0" name="masa" id="waga' + (rows.length - 1) + '"  class="form-control waga" " /></td>')
 
             $(w).insertAfter("td:last");
             $(w).addClass("waga");
-            $(v).insertAfter("td:last");
+            $(c).insertAfter("td:last");
             //$(r).attr('id', 'poz');
             $(r).insertAfter("td:last")
-            var len = rows.length-2;
+            var len = rows.length - 2;
             $('#poz' + len).removeClass('btn btn-primary');
             $('#poz' + len).attr('value', 'Usuń');
             $('#poz' + len).attr('onclick', '').unbind('click');
-            $('#poz' + len).addClass('btn btn-danger btn-block');
-            
-
+            $('#poz' + len).attr('onclick', 'usun()').bind('click');
+            setTimeout(function () {
+                $('#poz' + len).addClass('btn btn-danger btn-block usun');
+                $('#poz' + len).attr('id', "usun" + (rows.length - 2))
+            }, 5);
 
 
 
@@ -162,7 +213,7 @@
 
 
         }
-
+  
 
     </script>
 
