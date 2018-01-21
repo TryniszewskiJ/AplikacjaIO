@@ -81,10 +81,14 @@
     <div>
         @RenderBody()
     </div>
-    <footer style="position:absolute;bottom:0;width:100%;height:60px;background:black;">
+    <footer style="position:absolute;bottom:0;width:100%;height:60px;" class="bg-dark">
         <div class="container-fluid" style="background-color:black;min-height:100%">
             <div class="container">
-                asd
+                <div class="row">
+                    <div class="col-12" style="text-align:center;margin-top:10px;color:white">
+                        <p>&copy; @DateTime.Now.Year - Luna Express</p>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
