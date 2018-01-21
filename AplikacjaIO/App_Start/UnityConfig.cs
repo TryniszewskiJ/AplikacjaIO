@@ -48,6 +48,7 @@ namespace AplikacjaIO
             container.RegisterType<IKierownik, Kierownik>(new PerRequestLifetimeManager());
             container.RegisterType<IPromocja, Promocja>(new PerRequestLifetimeManager());
             container.RegisterType<IRachunki, Rachunki>(new PerRequestLifetimeManager());
+            container.RegisterType<IRaporty, Raporty>(new PerRequestLifetimeManager());
         }
     }
 }
