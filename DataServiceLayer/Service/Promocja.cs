@@ -90,7 +90,7 @@ namespace DataServiceLayer.Service
                 using (DataBase context = new DataBase())
                 {
                     var kierownik = context.Kierowniks.SingleOrDefault(c => c.kierownikID == model.IdKierownika);
-                    if(kierownik == null)
+                    if(kierownik == null && context.Promocjas.Any(c => c.WysokscRabatu == model.WysokoscRabatu))
                     {
                         return null;
                     }

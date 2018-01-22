@@ -12,7 +12,7 @@
           <Property Name="imie" Type="char" MaxLength="10" />
           <Property Name="nazwisko" Type="char" MaxLength="10" />
           <Property Name="haslo" Type="char" MaxLength="10" />
-          <Property Name="kasjerID" Type="int" Nullable="false" />
+          <Property Name="kasjerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Login" Type="char" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Kierownik">
@@ -22,14 +22,14 @@
           <Property Name="imie" Type="char" MaxLength="10" />
           <Property Name="nazwisko" Type="char" MaxLength="10" />
           <Property Name="haslo" Type="char" MaxLength="10" />
-          <Property Name="kierownikID" Type="int" Nullable="false" />
+          <Property Name="kierownikID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Login" Type="char" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="PozycjeNaRachunku">
           <Key>
             <PropertyRef Name="IdPozycji" />
           </Key>
-          <Property Name="IdPozycji" Type="int" Nullable="false" />
+          <Property Name="IdPozycji" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ilosc" Type="float" />
           <Property Name="Cena" Type="float" />
           <Property Name="IdRachunku" Type="int" />
@@ -40,7 +40,7 @@
           </Key>
           <Property Name="nazwaPromocji" Type="char" MaxLength="10" />
           <Property Name="opisPromocji" Type="varchar" MaxLength="250" />
-          <Property Name="promocjaID" Type="int" Nullable="false" />
+          <Property Name="promocjaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="kierownikID" Type="int" />
           <Property Name="DataWdrozenia" Type="datetime" Nullable="false" />
           <Property Name="WysokscRabatu" Type="int" />
@@ -49,7 +49,7 @@
           <Key>
             <PropertyRef Name="IdRachunku" />
           </Key>
-          <Property Name="IdRachunku" Type="int" Nullable="false" />
+          <Property Name="IdRachunku" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="wysokoscRachunku" Type="float" />
           <Property Name="kasjerID" Type="int" />
           <Property Name="DataRachunku" Type="datetime" />
