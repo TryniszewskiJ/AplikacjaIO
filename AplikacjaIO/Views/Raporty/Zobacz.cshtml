@@ -3,71 +3,7 @@
     ViewBag.Title = "Zobacz";
 }
 
-@*<h2>Zobacz</h2>
 
-<div>
-    @Html.LabelFor(c => c.IdRaportu)
-</div>
-<div>
-    @Html.DisplayFor(c => c.IdRaportu)
-</div>
-<div>
-    @Html.LabelFor(c => c.Suma)
-</div>
-<div>
-    @Html.DisplayFor(c => c.Suma)
-</div>
-<div>
-    @Html.LabelFor(c => c.DataOd)
-</div>
-<div>
-    @Html.DisplayFor(c => c.DataOd)
-</div>
-<div>
-    @Html.LabelFor(c => c.DataDo)
-</div>
-<div>
-    @Html.DisplayFor(c => c.DataDo)
-</div>
-<table>
-    <tr>
-        <td>
-            @Html.LabelFor(c => c.RachunkiNaRaporcie.FirstOrDefault().IdRachunku)
-        </td>
-        <td>
-            @Html.LabelFor(c => c.RachunkiNaRaporcie.FirstOrDefault().Wysokosc)
-        </td>
-        <td>
-            @Html.LabelFor(c => c.RachunkiNaRaporcie.FirstOrDefault().DataRachunku)
-        </td>
-        <td>
-            @Html.LabelFor(c => c.RachunkiNaRaporcie.FirstOrDefault().NazwaKasjera)
-        </td>
-        <td>
-
-        </td>
-    </tr>
-    @for(int i = 0; i< Model.RachunkiNaRaporcie.Count;i++)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(c => c.RachunkiNaRaporcie[i].IdRachunku)
-            </td>
-            <td>
-                @Html.DisplayFor(c => c.RachunkiNaRaporcie[i].Wysokosc)
-            </td>
-            <td>
-                @Html.DisplayFor(c => c.RachunkiNaRaporcie[i].DataRachunku)
-            </td>
-            <td>
-                @Html.DisplayFor(c => c.RachunkiNaRaporcie[i].NazwaKasjera)
-            </td>
-            <td>
-                przycisk do ~/Rachunki/Zobacz/IdTegoRachnku
-            </td>
-        </tr>
-    }
-</table>*@
 
 
 <div class="container-fluid">

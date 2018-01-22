@@ -14,12 +14,21 @@ namespace DataBaseLayer
     
     public partial class Promocja
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Promocja()
+        {
+            this.Rachunkis = new HashSet<Rachunki>();
+        }
+    
         public string nazwaPromocji { get; set; }
         public string opisPromocji { get; set; }
         public int promocjaID { get; set; }
         public Nullable<int> kierownikID { get; set; }
         public System.DateTime DataWdrozenia { get; set; }
+        public Nullable<int> WysokscRabatu { get; set; }
     
         public virtual Kierownik Kierownik { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Rachunki> Rachunkis { get; set; }
     }
 }

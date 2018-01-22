@@ -3,11 +3,13 @@ using DataServiceLayer.Models.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 
 namespace AplikacjaIO.Controllers
 {
+    [Authorize]
     public class RachunkiController : Controller
     {
         private readonly IRachunki _rachunki;
@@ -23,18 +25,27 @@ namespace AplikacjaIO.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Kasjer")]
         [HttpGet]
         public ActionResult Otworz()
         {
-            return View();
+            var model = _rachunki.GetPromocje();
+            return View(model);
         }
 
+        [Authorize(Roles = "Kasjer")]
         [HttpPost]
-        public ActionResult Zamknij(RachunkiModel rachunek)
+        public ActionResult Zamknij()
         {
-            var d = Request.Form.AllKeys;
-            var c = Request.Form.Get("masa");
-            return View();
+            var masa = Request.Form.Get("masa");
+            var rabat = Request.Form.Get("sel");
+            var idKasjera = Convert.ToInt32(((ClaimsPrincipal)User).FindFirst(ClaimTypes.NameIdentifier).Value);
+            var model = _rachunki.Dodaj(masa, rabat,idKasjera);
+            if(model == null)
+            {
+                ViewBag.Error = true;
+            }
+            return View("Zobacz", model);
         }
 
         [HttpGet]

@@ -43,6 +43,7 @@
           <Property Name="promocjaID" Type="int" Nullable="false" />
           <Property Name="kierownikID" Type="int" />
           <Property Name="DataWdrozenia" Type="datetime" Nullable="false" />
+          <Property Name="WysokscRabatu" Type="int" />
         </EntityType>
         <EntityType Name="Rachunki">
           <Key>
@@ -52,6 +53,7 @@
           <Property Name="wysokoscRachunku" Type="float" />
           <Property Name="kasjerID" Type="int" />
           <Property Name="DataRachunku" Type="datetime" />
+          <Property Name="IdPromocji" Type="int" />
         </EntityType>
         <EntityType Name="Raporty">
           <Key>
@@ -110,6 +112,18 @@ warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Rachunki_Promocje">
+          <End Role="Promocja" Type="Self.Promocja" Multiplicity="0..1" />
+          <End Role="Rachunki" Type="Self.Rachunki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promocja">
+              <PropertyRef Name="promocjaID" />
+            </Principal>
+            <Dependent Role="Rachunki">
+              <PropertyRef Name="IdPromocji" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="pr_Raporty_Rachunki_Rachunki">
           <End Role="Rachunki" Type="Self.Rachunki" Multiplicity="1" />
           <End Role="Raporty_Rachunki" Type="Self.Raporty_Rachunki" Multiplicity="*" />
@@ -159,6 +173,10 @@ warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not hav
             <End Role="Kasjer" EntitySet="Kasjer" />
             <End Role="Rachunki" EntitySet="Rachunki" />
           </AssociationSet>
+          <AssociationSet Name="FK_Rachunki_Promocje" Association="Self.FK_Rachunki_Promocje">
+            <End Role="Promocja" EntitySet="Promocja" />
+            <End Role="Rachunki" EntitySet="Rachunki" />
+          </AssociationSet>
           <AssociationSet Name="pr_Raporty_Rachunki_Rachunki" Association="Self.pr_Raporty_Rachunki_Rachunki">
             <End Role="Rachunki" EntitySet="Rachunki" />
             <End Role="Raporty_Rachunki" EntitySet="Raporty_Rachunki" />
@@ -194,6 +212,10 @@ warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not hav
           <AssociationSet Name="Raporty_Rachunki" Association="BazaIOModel.Raporty_Rachunki">
             <End Role="Rachunki" EntitySet="Rachunkis" />
             <End Role="Raporty" EntitySet="Raporties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rachunki_Promocje" Association="BazaIOModel.FK_Rachunki_Promocje">
+            <End Role="Promocja" EntitySet="Promocjas" />
+            <End Role="Rachunki" EntitySet="Rachunkis" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Kasjer">
@@ -238,6 +260,8 @@ warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not hav
           <Property Name="kierownikID" Type="Int32" />
           <Property Name="DataWdrozenia" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Kierownik" Relationship="BazaIOModel.FK_Promocja_Kierownik" FromRole="Promocja" ToRole="Kierownik" />
+          <Property Name="WysokscRabatu" Type="Int32" />
+          <NavigationProperty Name="Rachunkis" Relationship="BazaIOModel.FK_Rachunki_Promocje" FromRole="Promocja" ToRole="Rachunki" />
         </EntityType>
         <EntityType Name="Rachunki">
           <Key>
@@ -250,6 +274,8 @@ warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not hav
           <NavigationProperty Name="Kasjer" Relationship="BazaIOModel.FK_Rachunki_Kasjer" FromRole="Rachunki" ToRole="Kasjer" />
           <NavigationProperty Name="PozycjeNaRachunkus" Relationship="BazaIOModel.FK_Pozycje_Rachunki" FromRole="Rachunki" ToRole="PozycjeNaRachunku" />
           <NavigationProperty Name="Raporties" Relationship="BazaIOModel.Raporty_Rachunki" FromRole="Rachunki" ToRole="Raporty" />
+          <Property Name="IdPromocji" Type="Int32" />
+          <NavigationProperty Name="Promocja" Relationship="BazaIOModel.FK_Rachunki_Promocje" FromRole="Rachunki" ToRole="Promocja" />
         </EntityType>
         <Association Name="FK_Rachunki_Kasjer">
           <End Type="BazaIOModel.Kasjer" Role="Kasjer" Multiplicity="0..1" />
@@ -301,6 +327,18 @@ warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not hav
           <End Type="BazaIOModel.Rachunki" Role="Rachunki" Multiplicity="*" />
           <End Type="BazaIOModel.Raporty" Role="Raporty" Multiplicity="*" />
         </Association>
+        <Association Name="FK_Rachunki_Promocje">
+          <End Type="BazaIOModel.Promocja" Role="Promocja" Multiplicity="0..1" />
+          <End Type="BazaIOModel.Rachunki" Role="Rachunki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promocja">
+              <PropertyRef Name="promocjaID" />
+            </Principal>
+            <Dependent Role="Rachunki">
+              <PropertyRef Name="IdPromocji" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -342,6 +380,7 @@ warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not hav
           <EntitySetMapping Name="Promocjas">
             <EntityTypeMapping TypeName="BazaIOModel.Promocja">
               <MappingFragment StoreEntitySet="Promocja">
+                <ScalarProperty Name="WysokscRabatu" ColumnName="WysokscRabatu" />
                 <ScalarProperty Name="DataWdrozenia" ColumnName="DataWdrozenia" />
                 <ScalarProperty Name="kierownikID" ColumnName="kierownikID" />
                 <ScalarProperty Name="promocjaID" ColumnName="promocjaID" />
@@ -353,6 +392,7 @@ warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not hav
           <EntitySetMapping Name="Rachunkis">
             <EntityTypeMapping TypeName="BazaIOModel.Rachunki">
               <MappingFragment StoreEntitySet="Rachunki">
+                <ScalarProperty Name="IdPromocji" ColumnName="IdPromocji" />
                 <ScalarProperty Name="DataRachunku" ColumnName="DataRachunku" />
                 <ScalarProperty Name="kasjerID" ColumnName="kasjerID" />
                 <ScalarProperty Name="wysokoscRachunku" ColumnName="wysokoscRachunku" />

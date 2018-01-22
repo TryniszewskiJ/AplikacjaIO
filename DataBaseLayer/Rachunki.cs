@@ -25,11 +25,13 @@ namespace DataBaseLayer
         public Nullable<double> wysokoscRachunku { get; set; }
         public Nullable<int> kasjerID { get; set; }
         public Nullable<System.DateTime> DataRachunku { get; set; }
+        public Nullable<int> IdPromocji { get; set; }
     
         public virtual Kasjer Kasjer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PozycjeNaRachunku> PozycjeNaRachunkus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Raporty> Raporties { get; set; }
+        public virtual Promocja Promocja { get; set; }
     }
 }

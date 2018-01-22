@@ -27,4 +27,10 @@ namespace DataServiceLayer.Models.View
         public double Cena { get; set; }
         public double Ilosc { get; set; }
     }
+
+    public class RachunkiSaveModel
+    {
+        public string NazwaPromocji { get; set; }
+        public int Rabat { get; set; }
+    }
 }

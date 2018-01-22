@@ -1,10 +1,10 @@
-﻿
+﻿@model List<DataServiceLayer.Models.View.RachunkiSaveModel>
 @{
     ViewBag.Title = "Otworz";
 }
 
 
-@using (Html.BeginForm("", "", FormMethod.Post))
+@using (Html.BeginForm("Zamknij", "Rachunki", FormMethod.Post))
     {
 <div class="container-fluid" style="background-color:#dadada">
     <div class="container">
@@ -58,7 +58,12 @@
                         </div>
                     </div>
                     <div style="width:12%">
-                        <select id="sel" class=form-control><option value=1>Brak Rabatu</option><option value=30>Studencki</option><option value=25>Wieczorna</option></select>
+                        <select id="sel" class=form-control name="sel">
+                            @for(int i = 0; i < Model.Count; i++)
+                            {
+                                <option value="@Model[i].Rabat">@Model[i].NazwaPromocji</option>
+                            }
+                        </select>
                     </div>
                 </div>
             </div>

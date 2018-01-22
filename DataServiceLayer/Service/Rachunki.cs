@@ -19,30 +19,79 @@ namespace DataServiceLayer.Service
 {
     public class Rachunki : IRachunki
     {
-        public RachunkiModel Dodaj(RachunkiModel model,int IdKasjer)
+        public RachunkiModel Dodaj(string masa, string rabat,int IdKasjer)
         {
-            using (DataBase context = new DataBase())
+            try
             {
-                DataBaseLayer.Rachunki rachunek = new DataBaseLayer.Rachunki
+                var masy = masa.Split(',');
+                using (DataBase context = new DataBase())
                 {
-                    DataRachunku = DateTime.Now,
-                    kasjerID = IdKasjer,
-                    Kasjer = context.Kasjers.SingleOrDefault(c => c.kasjerID == IdKasjer),
-                    wysokoscRachunku = model.Wysokosc,
-                    PozycjeNaRachunkus = new List<PozycjeNaRachunku>(),
-                };
-                foreach(var pozycja in model.Sklad)
-                {
-                    rachunek.PozycjeNaRachunkus.Add(new PozycjeNaRachunku
+                    var nowyRachunek = context.Rachunkis.Create();
+                    nowyRachunek.DataRachunku = DateTime.Now;
+                    nowyRachunek.kasjerID = IdKasjer;
+                    nowyRachunek.Kasjer = context.Kasjers.SingleOrDefault(c => c.kasjerID == IdKasjer);
+                    int rabatInt = Convert.ToInt32(rabat);
+                    nowyRachunek.IdPromocji = context.Promocjas.SingleOrDefault(c => c.WysokscRabatu == rabatInt).promocjaID;
+                    nowyRachunek.Promocja = context.Promocjas.SingleOrDefault(c => c.WysokscRabatu == rabatInt);
+                    foreach(var mas in masy)
                     {
-                        Cena = pozycja.Cena,
-                        Ilosc = pozycja.Ilosc,
-                        Rachunki = rachunek,
-                        IdRachunku = rachunek.IdRachunku
-                    });
+                        nowyRachunek.PozycjeNaRachunkus.Add(new PozycjeNaRachunku
+                        {
+                            IdRachunku = nowyRachunek.IdRachunku,
+                            Rachunki = nowyRachunek,
+                            Ilosc = Convert.ToDouble(mas),
+                            Cena = Convert.ToDouble(mas) * 3.49
+                        });
+                    }
+                    context.SaveChanges();
+                    RachunkiModel model = new RachunkiModel
+                    {
+                        IdRachunku = nowyRachunek.IdRachunku,
+                        DataRachunku = nowyRachunek.DataRachunku.Value,
+                        Wysokosc = nowyRachunek.wysokoscRachunku.Value,
+                        IdKasjera = nowyRachunek.IdRachunku,
+                        NazwaKasjera = nowyRachunek.Kasjer.imie + " " + nowyRachunek.Kasjer.nazwisko,
+                        Sklad = new List<PozycjeModel>()
+                    };
+                    foreach (var pozycja in nowyRachunek.PozycjeNaRachunkus)
+                    {
+                        model.Sklad.Add(new PozycjeModel
+                        {
+                            Cena = pozycja.Cena.Value,
+                            IdPozycji = pozycja.IdPozycji,
+                            IdRachunku = pozycja.IdRachunku.Value,
+                            Ilosc = pozycja.Ilosc.Value
+                        });
+                    }
+
+                    return model;
                 }
             }
-            return model;
+            catch
+            {
+                return null;
+            }
+        }
+
+        public List<RachunkiSaveModel> GetPromocje()
+        {
+            try
+            {
+                using (DataBase context = new DataBase())
+                {
+                    var promocje = context.Promocjas.ToList();
+                    List<RachunkiSaveModel> list = new List<RachunkiSaveModel>();
+                    foreach(var promocja in promocje)
+                    {
+                        list.Add(new RachunkiSaveModel() { NazwaPromocji = promocja.nazwaPromocji, Rabat = promocja.WysokscRabatu.Value });
+                    }
+                    return list;
+                }
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public void Usun(int IdRachunku)
