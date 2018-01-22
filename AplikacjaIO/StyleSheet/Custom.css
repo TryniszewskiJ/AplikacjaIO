@@ -1037,3 +1037,12 @@ input[type=range] {
 .ui-datepicker {
     width: 1000px; /*what ever width you want*/
 }
+.utworz{
+    display:inline-block !important;
+    width:87% !important;
+
+}
+.ui-datepicker-trigger {
+    border: none;
+    background: none
+}

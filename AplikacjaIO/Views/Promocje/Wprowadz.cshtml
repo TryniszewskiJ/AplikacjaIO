@@ -109,8 +109,7 @@
                         </div>
                         <div class="col-md-3 col-12">
                             <div class="input-group" >
-                                @Html.EditorFor(Model => Model.DataWdrozenia, new { htmlAttributes = new { @class = "form-control intro-input " , @id="datepicker" } })
-                                <i class="fa fa-calendar" style="font-size:35px" aria-hidden="true"></i>
+                                @Html.EditorFor(Model => Model.DataWdrozenia, new { htmlAttributes = new { @class = "form-control intro-input " , @id="datepick" } })
                                 @Html.ValidationMessageFor(model => model.DataWdrozenia, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -173,10 +172,20 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type="text/javascript">
-          
-            //$(function () {
-            //    $("#datepicker").datepicker();
-            //});
+            $(document).ready(function () {
+                $("#datepick").click(function () { $("#datepick").datepicker('show'); });
+            });
+            $(function () {
+                $("#datepick").datepicker({
+                    buttonText: "Select",
+                    showOn: "button",
+                    buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+                    format: 'dd-MM-yyyy',
+                    changeYear: true,
+                    changeMonth: true,
+                    yearRange: '-100:+0',
+                });
+            });
             
         </script>
     }

@@ -39,6 +39,17 @@
             }
         </table>
     </div>
+
+
+
+    @if (((System.Security.Claims.ClaimsPrincipal)User).FindFirst(System.Security.Claims.ClaimTypes.Role).Value == "Kasjer")
+    {
+        <div class="row mar-top50">
+            <div class="col-12">
+                @Html.ActionLink("Otworz", "Otworz", "Rachunki", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    }
 </div>
 
 

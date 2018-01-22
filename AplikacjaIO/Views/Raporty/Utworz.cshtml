@@ -75,30 +75,30 @@
             }
         }
     }
-    using (Html.BeginForm(akcja, "Promocje", FormMethod.Post))
+    using (Html.BeginForm(akcja, "Raporty", FormMethod.Post))
     {
         <div class="container-fluid">
             <div class="container">
 
                 <div class="row marg200200">
-                    <div class="col-md-2 col-12">
+                    <div class="col-md-3 col-12">
                         <strong>@Html.LabelFor(Model => Model.DataOd , htmlAttributes: new { @class = "control-label labelIntro" })</strong>
                     </div>
-                    <div class="col-md-5 col-12">
-                        @Html.EditorFor(Model => Model.DataOd, new { htmlAttributes = new { @class = "form-control intro-input", @id = "datepick2" } })
-                        <i class="fa fa-calendar" style="font-size:35px" aria-hidden="true"></i>
+                    <div class="col-md-3 col-12">
+                        @Html.EditorFor(Model => Model.DataOd, new { htmlAttributes = new { @class = "form-control intro-input utworz", @id = "datepick2" } })
+                        
                         @Html.ValidationMessageFor(model => model.DataOd, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="row marg200200">
-                    <div class="col-md-2 col-12">
+                    <div class="col-md-3 col-6">
                         <strong>@Html.LabelFor(Model => Model.DataDo, htmlAttributes: new { @class = "control-label labelIntro"})</strong>
                        
                     </div>
-                    <div class="col-md-5 col-12">
-                        @Html.EditorFor(Model => Model.DataDo, new { htmlAttributes = new { @class = "form-control intro-input ", @id = "datepick" } })
-                        <i class="fa fa-calendar" style="font-size:35px" id="dp" aria-hidden="true"></i>
+                    <div class="col-md-3 col-6">
+                        @Html.EditorFor(Model => Model.DataDo, new { htmlAttributes = new { @class = "form-control intro-input utworz", @id = "datepick" } })
+                        
                         @Html.ValidationMessageFor(model => model.DataDo, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -136,31 +136,48 @@
 }
 @section Scripts {
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
-    <!-- jQuery first, then Tether, then Bootstrap JS. -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-    <!-- datepicker -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript">
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
 
-            $(function () {
-                $("#datepick").datepicker();
-            });
-            $(function () {
-                $("#datepick2").datepicker(
-                    {
-                        buttonText: "Select",
-                        format: 'dd-MM-yyyy',
-                        changeYear: true,
-                        changeMonth: true,
-                        yearRange: '-100:+0',
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+<!-- datepicker -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
 
-                    });
+
+    $(document).ready(function () {
+        $("#datepick").click(function () { $("#datepick").datepicker('show'); });
+        $("#datepick2").click(function () { $("#datepick2").datepicker('show'); });
+    });
+    $(function () {
+        $("#datepick").datepicker({
+            buttonText: " < i class='fa fa-calendar' ></i>",
+            showOn: "button",
+            buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+            format: 'dd-MM-yyyy',
+            changeYear: true,
+            changeMonth: true,
+            yearRange: '-100:+0'
+        });
+    });
+    $(function () {
+        $("#datepick2").datepicker(
+            {
+                buttonText: "Select",
+                showOn: "button",
+                buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+                format: 'dd-MM-yyyy',
+                changeYear: true,
+                changeMonth: true,
+                yearRange: '-100:+0'
+
             });
-    </script>
+    });
+</script>
+
 }
 
