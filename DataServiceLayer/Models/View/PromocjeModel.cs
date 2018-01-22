@@ -19,11 +19,13 @@ namespace DataServiceLayer.Models.View
         [DataType(DataType.MultilineText)] /*DODANE POD TEXTAREA*/
         public string OpisPromocji { get; set; }
         [Display(Name = "Data wdrożenia")]
-        [DataType(DataType.DateTime)]
         [Required(ErrorMessage = "Pole wymagane")]
         public DateTime DataWdrozenia { get; set; }
         [Display(Name = "Kto utworzył")]
         public string NazwaKierownika { get; set; }
         public int IdKierownika { get; set; }
+        [Display(Name = "Wysokośc Rabatu(%)")]
+        [Required(ErrorMessage = "Pole wymagane")]
+        public int WysokoscRabatu { get; set; }
     }
 }

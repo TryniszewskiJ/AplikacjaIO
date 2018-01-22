@@ -56,7 +56,8 @@ namespace DataServiceLayer.Service
                             DataWdrozenia = promocja.DataWdrozenia,
                             IDPromoca = promocja.promocjaID,
                             NazwaPromocji = promocja.nazwaPromocji,
-                            OpisPromocji = promocja.opisPromocji
+                            OpisPromocji = promocja.opisPromocji,
+                            WysokoscRabatu = promocja.WysokscRabatu.Value
                         };
                     }
                     return null;
@@ -76,6 +77,7 @@ namespace DataServiceLayer.Service
                 promocja.opisPromocji = model.OpisPromocji;
                 promocja.nazwaPromocji = model.NazwaPromocji;
                 promocja.DataWdrozenia = model.DataWdrozenia;
+                promocja.WysokscRabatu = model.WysokoscRabatu;
                 context.SaveChanges();
             }
             return model;
@@ -98,7 +100,8 @@ namespace DataServiceLayer.Service
                         nazwaPromocji = model.NazwaPromocji,
                         opisPromocji = model.OpisPromocji,
                         kierownikID = model.IdKierownika,
-                        Kierownik = kierownik
+                        Kierownik = kierownik,
+                        WysokscRabatu = model.WysokoscRabatu
                     };
                     context.Promocjas.Add(promocja);
                     context.SaveChanges();
@@ -125,7 +128,8 @@ namespace DataServiceLayer.Service
                         NazwaPromocji = promocja.nazwaPromocji,
                         OpisPromocji = promocja.opisPromocji,
                         IDPromoca = promocja.promocjaID,
-                        NazwaKierownika = promocja.Kierownik.imie + " " + promocja.Kierownik.nazwisko
+                        NazwaKierownika = promocja.Kierownik.imie + " " + promocja.Kierownik.nazwisko,
+                        WysokoscRabatu = promocja.WysokscRabatu.Value
                     });
                 }
                 return list;

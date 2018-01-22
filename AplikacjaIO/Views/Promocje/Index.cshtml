@@ -35,6 +35,9 @@
                     <td style="width:25%;border-right:1px solid black">
                          <strong style="font-size:20px;">@Html.LabelFor(model => model.FirstOrDefault().OpisPromocji)</strong>
                     </td>
+                    <td>
+                        <strong style="font-size:20px;">@Html.LabelFor(model => model.FirstOrDefault().WysokoscRabatu)</strong>
+                    </td>
                     <td style="width:25%;border-right:1px solid black">
                         <strong style="font-size:20px;">@Html.LabelFor(model => model.FirstOrDefault().DataWdrozenia)</strong>
                     </td>
@@ -52,6 +55,9 @@
                         </td>
                         <td style="padding-top:10px;padding-bottom:10px;">
                             @Html.DisplayFor(model => model[i].OpisPromocji, new { htmlAttributes = new { @class = "form-control intro-input"} })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model[i].WysokoscRabatu, new { htmlAttributes = new { @class = "form-control intro-input"} })
                         </td>
                         <td style="padding-top:10px;padding-bottom:10px;">
                             @Html.DisplayFor(model => model[i].DataWdrozenia, new { htmlAttributes = new { @class = "form-control intro-input" } })

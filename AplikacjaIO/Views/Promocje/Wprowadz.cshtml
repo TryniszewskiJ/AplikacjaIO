@@ -95,6 +95,16 @@
 
                     <div class="row marg200200">
                         <div class="col-md-2 col-12">
+                            <strong>@Html.LabelFor(Model => Model.WysokoscRabatu, htmlAttributes: new { @class = "control-label labelIntro" })</strong>
+                        </div>
+                        <div class="col-md-3 col-12">
+                            @Html.EditorFor(Model => Model.NazwaPromocji, new { htmlAttributes = new { @class = "form-control intro-input" } })
+                            @Html.ValidationMessageFor(model => model.WysokoscRabatu, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row marg200200">
+                        <div class="col-md-2 col-12">
                             <strong>@Html.LabelFor(Model => Model.DataWdrozenia, htmlAttributes: new { @class = "control-label labelIntro" })</strong>
                         </div>
                         <div class="col-md-3 col-12">
