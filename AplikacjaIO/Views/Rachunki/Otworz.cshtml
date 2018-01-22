@@ -3,14 +3,14 @@
     ViewBag.Title = "Otworz";
 }
 
-<h2>Otworz</h2>
+
 @using (Html.BeginForm("", "", FormMethod.Post))
     {
 <div class="container-fluid" style="background-color:#dadada">
     <div class="container">
         <div class="row">
             <div class="col-12" style="font-family:Arial, Helvetica, sans-serif">
-                <span style="font-size:36px"><strong>Rachunek!</strong></span>
+                <span style="font-size:36px"><strong>Nowy Rachunek!</strong></span>
             </div>
         </div>
         <table id="table">
@@ -50,7 +50,7 @@
                     <div style="width:49.3333%">
 
                     </div>
-                    <div class="col-2">
+                    <div class="" style="width:12%">
                         <div style="border-top:1px solid black">
                             <span>Suma:</span>
                             <input type="number" id="suma12" style="background-color:transparent;border:none;width:70px" value="0" disabled />zł
@@ -61,6 +61,11 @@
                         <select id="sel" class=form-control><option value=1>Brak Rabatu</option><option value=30>Studencki</option><option value=25>Wieczorna</option></select>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <input  type="submit" class="btn btn-primary" value="Zamknij Rachunek">
             </div>
         </div>
     </div>
