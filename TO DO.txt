@@ -1,0 +1,3 @@
+TO DO:
+Button do otwarcia rachunku u kasjer(MENU)
+DATEPICKER w /Promocje/Wprowadz nie dziala
