@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace AplikacjaIO.Controllers
 {
-    //[Authorize(Roles = "Kierownik")]
+    [Authorize(Roles = "Kierownik")]
     public class PromocjeController : Controller
     {
         private readonly IPromocja _promocja;
@@ -43,8 +43,6 @@ namespace AplikacjaIO.Controllers
         {
             ViewBag.czyEdycja = false;
             var data = Request.Form.GetValues("DataWdrozenia");
-            //model.DataWdrozenia = DateTime.ParseExact(data[0], "MM/dd/yyyy", CultureInfo.InvariantCulture);
-            model.DataWdrozenia = DateTime.ParseExact(data[0], "MM/dd/yyyy", CultureInfo.InvariantCulture);
             model.IdKierownika = Convert.ToInt32(((ClaimsPrincipal)User).FindFirst(ClaimTypes.NameIdentifier).Value);
             ViewBag.czyPost = true; 
             model = _promocja.Wprowadz(model);
