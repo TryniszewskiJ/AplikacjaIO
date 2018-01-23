@@ -1046,3 +1046,9 @@ input[type=range] {
     border: none;
     background: none
 }
+#table tr{
+    text-align:center
+}
+#table .form-control{
+   display:inline-block
+}
