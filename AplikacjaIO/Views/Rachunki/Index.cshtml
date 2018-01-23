@@ -32,7 +32,11 @@
                             @Html.DisplayFor(model => model[i].DataRachunku, new { htmlAttributes = new { @class = "form-control intro-input" } })
                         </td>
                         <td style="padding-top:10px;padding-bottom:10px;">
-                            @Html.ActionLink("Usuń", "usun", "Rachunki", new { IdRachunku = Model[i].IdRachunku }, new { @class = "btn btn-danger btn-block" })
+                               @if (((System.Security.Claims.ClaimsPrincipal)User).FindFirst(System.Security.Claims.ClaimTypes.Role).Value == "Kierownik")
+                               {
+                                @Html.ActionLink("Usuń", "usun", "Rachunki", new { IdRachunku = Model[i].IdRachunku }, new { @class = "btn btn-danger btn-block" })
+                               }
+                           
                             @Html.ActionLink("Zobacz", "Zobacz", "Rachunki", new { IdRachunku = Model[i].IdRachunku }, new { @class = "btn btn-success" })
                         </td>
                     </tr>

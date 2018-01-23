@@ -5,12 +5,7 @@
 @using (Html.BeginForm("Kasjer", "Login", FormMethod.Post))
 {
     //w tym ifie wyswietla sie informacja o bledzie
-    if (!string.IsNullOrEmpty(ViewBag.Error))
-    {
-        <div class="text-danger">
-            @ViewBag.Error
-        </div>
-    }
+
     @Html.AntiForgeryToken()
     <div class="container">
         <div class="row" style="margin-top:2.5%">
@@ -23,7 +18,16 @@
                 <div class="form-control pdback w-text">
                     <div class="row">
                         <div class="col-12">
-                         
+                         <div class="row">
+                             <div class="col-12" style="font-size:26px;text-align:center">
+                                 @if (!string.IsNullOrEmpty(ViewBag.Error))
+                                 {
+                                     <div class="text-danger">
+                                         @ViewBag.Error
+                                     </div>
+                                 }
+                             </div>
+                         </div>
                             <div class="row">
                                 <div class="col-md-1">
                                 </div>
@@ -33,6 +37,7 @@
                                 <div class="col-12 col-md-6 intro-text">
                                     @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control intro-input", @placeholder = "wprowadź swój login" } })
                                     @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+                                
                                     <div class="col-md-1">
 
                                     </div>
