@@ -55,15 +55,13 @@ namespace AplikacjaIO.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Kierownik")]
         [HttpGet]
         public ActionResult Usun(int IdRachunku)
         {
             _rachunki.Usun(IdRachunku);
-            return View("Index");
-        }
-        public ActionResult Wybierz()
-        {
-            return View();
+            var model = _rachunki.GetRachunkiList();
+            return View("Index", model);
         }
 
     }
