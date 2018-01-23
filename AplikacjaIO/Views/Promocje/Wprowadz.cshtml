@@ -109,7 +109,11 @@
                         </div>
                         <div class="col-md-3 col-12">
                             <div class="input-group" >
-                                @Html.EditorFor(Model => Model.DataWdrozenia, new { htmlAttributes = new { @class = "form-control intro-input " , @id="datepick" } })
+                                @Html.EditorFor(Model => Model.DataWdrozenia, new { htmlAttributes = new { @class = "form-control intro-input " , @id="datepick", @type="date" } })
+                                <input type="hidden" id="alternate" @if (Model != null)
+                                {
+                                    @:value="@Model.DataWdrozenia.ToString("yyyy-MM-dd")"
+                                }/>
                                 @Html.ValidationMessageFor(model => model.DataWdrozenia, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -173,18 +177,35 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-                $("#datepick").click(function () { $("#datepick").datepicker('show'); });
+                $("#datepick").click(function () {
+                    $("#datepick").datepicker('show');
+                });
+                $("#datepick").val($("#alternate").val());
             });
             $(function () {
-                $("#datepick").datepicker({
-                    buttonText: "Select",
-                    showOn: "button",
-                    buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-                    format: 'dd-MM-yyyy',
-                    changeYear: true,
-                    changeMonth: true,
-                    yearRange: '-100:+0',
-                });
+                //$("#datepick").datepicker({
+                //    buttonText: "Select",
+                //    showOn: "button",
+                //    buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+                //    format: 'dd/MM/yyyy',
+                //    changeYear: true,
+                //    changeMonth: true,
+                //    yearRange: '-100:+0',
+                //});
+                if (!Modernizr.inputtypes.date) {
+                    $("#datepick").datepicker({
+                        buttonText: "Select",
+                        showOn: "button",
+                        buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+                        dateFormat: 'mm/dd/yy',
+                        altFormat: "yy-mm-dd",
+                        altField: '#alternate'
+                    });
+                } else {
+                    $('#datepick').on('change', function () {
+                        $('#alternate').val(this.value);
+                    });
+                }
             });
             
         </script>

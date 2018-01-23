@@ -33,16 +33,19 @@ namespace DataServiceLayer.Service
                     int rabatInt = Convert.ToInt32(rabat);
                     nowyRachunek.IdPromocji = context.Promocjas.SingleOrDefault(c => c.WysokscRabatu == rabatInt).promocjaID;
                     nowyRachunek.Promocja = context.Promocjas.SingleOrDefault(c => c.WysokscRabatu == rabatInt);
+                    nowyRachunek.wysokoscRachunku = 0;
                     foreach(var mas in masy)
                     {
-                        nowyRachunek.PozycjeNaRachunkus.Add(new PozycjeNaRachunku
-                        {
-                            IdRachunku = nowyRachunek.IdRachunku,
-                            Rachunki = nowyRachunek,
-                            Ilosc = Convert.ToDouble(mas),
-                            Cena = Convert.ToDouble(mas) * 3.49
-                        });
+                        var waga = mas.Replace('.', ',');
+                        var pozycja = context.PozycjeNaRachunkus.Create();
+                        pozycja.IdRachunku = nowyRachunek.IdRachunku;
+                        pozycja.Rachunki = nowyRachunek;
+                        pozycja.Ilosc = Convert.ToDouble(waga);
+                        pozycja.Cena = Convert.ToDouble(waga) * 3.49;
+                        nowyRachunek.wysokoscRachunku += pozycja.Cena;
+                        nowyRachunek.PozycjeNaRachunkus.Add(pozycja);
                     }
+                    context.Rachunkis.Add(nowyRachunek);
                     context.SaveChanges();
                     RachunkiModel model = new RachunkiModel
                     {
