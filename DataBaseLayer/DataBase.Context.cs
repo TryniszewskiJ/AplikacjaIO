@@ -31,5 +31,6 @@ namespace DataBaseLayer
         public virtual DbSet<Promocja> Promocjas { get; set; }
         public virtual DbSet<Rachunki> Rachunkis { get; set; }
         public virtual DbSet<Raporty> Raporties { get; set; }
+        public virtual DbSet<Raporty_Rachunki> Raporty_Rachunki { get; set; }
     }
 }

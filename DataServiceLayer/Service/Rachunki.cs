@@ -82,7 +82,7 @@ namespace DataServiceLayer.Service
             {
                 using (DataBase context = new DataBase())
                 {
-                    var promocje = context.Promocjas.ToList();
+                    var promocje = context.Promocjas.Where(c => c.DataWdrozenia >= DateTime.Now).ToList();
                     List<RachunkiSaveModel> list = new List<RachunkiSaveModel>();
                     foreach(var promocja in promocje)
                     {
@@ -121,6 +121,7 @@ namespace DataServiceLayer.Service
                         IdKasjera = rachunek.kasjerID.Value,
                         IdRachunku = rachunek.IdRachunku,
                         Wysokosc = rachunek.wysokoscRachunku.Value,
+                        DataRachunku = rachunek.DataRachunku.Value,
                         Sklad = null
                     });
                 }

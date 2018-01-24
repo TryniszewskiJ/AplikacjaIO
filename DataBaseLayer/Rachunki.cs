@@ -18,7 +18,7 @@ namespace DataBaseLayer
         public Rachunki()
         {
             this.PozycjeNaRachunkus = new HashSet<PozycjeNaRachunku>();
-            this.Raporties = new HashSet<Raporty>();
+            this.Raporty_Rachunki = new HashSet<Raporty_Rachunki>();
         }
     
         public int IdRachunku { get; set; }
@@ -30,8 +30,8 @@ namespace DataBaseLayer
         public virtual Kasjer Kasjer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PozycjeNaRachunku> PozycjeNaRachunkus { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Raporty> Raporties { get; set; }
         public virtual Promocja Promocja { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Raporty_Rachunki> Raporty_Rachunki { get; set; }
     }
 }

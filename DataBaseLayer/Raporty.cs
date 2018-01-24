@@ -17,7 +17,7 @@ namespace DataBaseLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Raporty()
         {
-            this.Rachunkis = new HashSet<Rachunki>();
+            this.Raporty_Rachunki = new HashSet<Raporty_Rachunki>();
         }
     
         public int IdRaportu { get; set; }
@@ -26,6 +26,6 @@ namespace DataBaseLayer
         public Nullable<System.DateTime> DataDo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rachunki> Rachunkis { get; set; }
+        public virtual ICollection<Raporty_Rachunki> Raporty_Rachunki { get; set; }
     }
 }

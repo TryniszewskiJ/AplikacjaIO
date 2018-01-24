@@ -32,8 +32,10 @@ namespace DataServiceLayer.Service
                     DataOd = raport.DataOd.Value,
                     RachunkiNaRaporcie = new List<RachunkiModel>()
                 };
-                foreach(var rachunek in raport.Rachunkis)
+                var Idrachunki = context.Raporty_Rachunki.Where(c => c.IdRaportu == IdRaportu).Select(c => c.IdRachunku);
+                foreach(var idRachunek in Idrachunki)
                 {
+                    var rachunek = context.Rachunkis.SingleOrDefault(c => c.IdRachunku == idRachunek);
                     RachunkiModel rachunekModel = new RachunkiModel
                     {
                         DataRachunku = rachunek.DataRachunku.Value,
@@ -76,22 +78,39 @@ namespace DataServiceLayer.Service
 
         public RaportModel Utworz(RaportModel model)
         {
-            using (DataBase context = new DataBase())
+           try
             {
-                var rachunki = context.Rachunkis.Where(c => c.DataRachunku.Value >= model.DataOd && c.DataRachunku.Value <= model.DataDo);
-                DataBaseLayer.Raporty nowy = context.Raporties.Create();
-                nowy.DataDo = model.DataDo;
-                nowy.DataOd = model.DataOd;
-                nowy.Suma = 0; 
-                foreach(var rachunek in rachunki)
+                if (model.DataOd > model.DataDo)
                 {
-                    nowy.Suma += rachunek.wysokoscRachunku;
-                    nowy.Rachunkis.Add(rachunek);
+                    return null;
                 }
-                context.Raporties.Add(nowy);
-                context.SaveChanges();
+                using (DataBase context = new DataBase())
+                {
+                    var rachunki = context.Rachunkis.Where(c => c.DataRachunku.Value >= model.DataOd && c.DataRachunku.Value <= model.DataDo);
+                    DataBaseLayer.Raporty nowy = context.Raporties.Create();
+                    nowy.DataDo = model.DataDo;
+                    nowy.DataOd = model.DataOd;
+                    nowy.Suma = 0;
+                    context.Raporties.Add(nowy);
+                    context.SaveChanges();
+                    foreach (var rachunek in rachunki)
+                    {
+                        nowy.Suma += rachunek.wysokoscRachunku;
+                        Raporty_Rachunki raporty_Rachunki = context.Raporty_Rachunki.Create();
+                        raporty_Rachunki.IdRachunku = rachunek.IdRachunku;
+                        raporty_Rachunki.Rachunki = rachunek;
+                        raporty_Rachunki.IdRaportu = nowy.IdRaportu;
+                        raporty_Rachunki.Raporty = nowy;
+                        context.Raporty_Rachunki.Add(raporty_Rachunki);
+                    }
+                    context.SaveChanges();
+                }
+                return model;
             }
-            return model;
+            catch
+            {
+                return null;
+            }
         }
 
         public void Usun(int IdRaportu)

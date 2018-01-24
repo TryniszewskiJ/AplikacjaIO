@@ -5,17 +5,19 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0f26d45b01f244cbb90281a8a2cf488c" Name="Diagram1" ZoomLevel="65">
-        <EntityTypeShape EntityType="BazaIOModel.Kasjer" Width="1.5" PointX="3.125" PointY="1" />
-        <EntityTypeShape EntityType="BazaIOModel.Kierownik" Width="1.5" PointX="0.75" PointY="4.375" />
-        <EntityTypeShape EntityType="BazaIOModel.PozycjeNaRachunku" Width="1.5" PointX="8.5" PointY="1" />
-        <EntityTypeShape EntityType="BazaIOModel.Promocja" Width="1.5" PointX="3" PointY="4.25" />
-        <EntityTypeShape EntityType="BazaIOModel.Rachunki" Width="1.5" PointX="5.875" PointY="0.875" />
+        <EntityTypeShape EntityType="BazaIOModel.Kasjer" Width="1.5" PointX="0.5" PointY="0.625" />
+        <EntityTypeShape EntityType="BazaIOModel.Kierownik" Width="1.5" PointX="0.5" PointY="3.25" />
+        <EntityTypeShape EntityType="BazaIOModel.PozycjeNaRachunku" Width="1.5" PointX="5.125" PointY="0.5" />
+        <EntityTypeShape EntityType="BazaIOModel.Promocja" Width="1.5" PointX="3.375" PointY="3.875" />
+        <EntityTypeShape EntityType="BazaIOModel.Rachunki" Width="1.5" PointX="3" PointY="0.625" />
         <AssociationConnector Association="BazaIOModel.FK_Rachunki_Kasjer" />
         <AssociationConnector Association="BazaIOModel.FK_Promocja_Kierownik" />
         <AssociationConnector Association="BazaIOModel.FK_Pozycje_Rachunki" />
-        <EntityTypeShape EntityType="BazaIOModel.Raporty" Width="1.5" PointX="5.875" PointY="4.375" />
-        <AssociationConnector Association="BazaIOModel.Raporty_Rachunki" />
         <AssociationConnector Association="BazaIOModel.FK_Rachunki_Promocje" />
+        <EntityTypeShape EntityType="BazaIOModel.Raporty" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BazaIOModel.Raporty_Rachunki" Width="1.5" PointX="8.625" PointY="2.375" />
+        <AssociationConnector Association="BazaIOModel.pr_Raporty_Rachunki_Rachunki" />
+        <AssociationConnector Association="BazaIOModel.pr_Raporty_Rachunki_Raporty" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

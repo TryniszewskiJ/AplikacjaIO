@@ -3,76 +3,20 @@
 @{
     string akcja = "Utworz";
 
-    if (ViewBag.czyEdycja == true)
-    {
-        akcja = "Edytuj";
-        <div class="container">
-            <div class="row" style="margin-top:2.5%;margin-bottom:5%">
-                <div class="col-12" style="font-family:Arial, Helvetica, sans-serif">
-                    <span style="font-size:36px"><strong>Edytuj Promocję!</strong></span>
-                </div>
-            </div>
-        </div>
-        if (ViewBag.czyPost == true)
-        {
-            if (ViewBag.Status == true)
-            {
-                //tutaj ze sie zapisaly zmiany
-                <div class="container">
-                    <div class="row" style="margin-top:2.5%;margin-bottom:5%">
-                        <div class="col-12" style="font-family:Arial, Helvetica, sans-serif">
-                            <span style="font-size:32px;color:lawngreen"><strong>Udało sie zapisać zmiany!</strong></span>
-                        </div>
-                    </div>
-                </div>
-            }
-            else
-            {
-                //tutaj inforamcja ze nie udalo sie zapisac zmian
-                <div class="container">
-                    <div class="row" style="margin-top:2.5%;margin-bottom:5%">
-                        <div class="col-12" style="font-family:Arial, Helvetica, sans-serif">
-                            <span style="font-size:32px;color:red"><strong>Nie Udało sie zapisać zmiany!</strong></span>
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-    }
-    else
-    {
-        <div class="container">
-            <div class="row" style="margin-top:2.5%;margin-bottom:5%">
-                <div class="col-12" style="font-family:Arial, Helvetica, sans-serif">
-                    <span style="font-size:36px"><strong>Stwórz Raport!</strong></span>
-                </div>
-            </div>
-        </div>
-        if (ViewBag.czyPost == true)
-        {
-            if (ViewBag.Status == true)
-            {
-                //tutaj ze sie zapisaly zmiany
-                <div class="container">
-                    <div class="row" style="margin-top:2.5%;margin-bottom:5%">
-                        <div class="col-12" style="font-family:Arial, Helvetica, sans-serif">
-                            <span style="font-size:32px;color:lawngreen"><strong>Promocja została dodana!</strong></span>
-                        </div>
-                    </div>
-                </div>
 
-            }
-            else
-            {
-                //tutaj inforamcja ze nie udalo sie zapisac zmian
-                <div class="container">
-                    <div class="row" style="margin-top:2.5%;margin-bottom:5%">
-                        <div class="col-12" style="font-family:Arial, Helvetica, sans-serif">
-                            <span style="font-size:32px;color:red"><strong>Promocja została dodana!</strong></span>
-                        </div>
-                    </div>
-                </div>
-            }
+    if (ViewBag.czyPostBack == true)
+    {
+        if (ViewBag.Error == true)
+        {
+            <div>
+                "Bład przy próbie utworzenia raportu!"
+            </div>
+        }
+        else
+        {
+            <div>
+                Raport utworzony pomyslnie!
+            </div>
         }
     }
     using (Html.BeginForm(akcja, "Raporty", FormMethod.Post))
@@ -85,8 +29,8 @@
                         <strong>@Html.LabelFor(Model => Model.DataOd , htmlAttributes: new { @class = "control-label labelIntro" })</strong>
                     </div>
                     <div class="col-md-3 col-12">
-                        @Html.EditorFor(Model => Model.DataOd, new { htmlAttributes = new { @class = "form-control intro-input utworz", @id = "datepick2" } })
-                        
+                        @Html.EditorFor(Model => Model.DataOd, new { htmlAttributes = new { @class = "form-control intro-input utworz", @id = "datepick2", @type="date" } })
+                        <input type="hidden" id="alternate2" />
                         @Html.ValidationMessageFor(model => model.DataOd, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -97,8 +41,8 @@
                        
                     </div>
                     <div class="col-md-3 col-6">
-                        @Html.EditorFor(Model => Model.DataDo, new { htmlAttributes = new { @class = "form-control intro-input utworz", @id = "datepick" } })
-                        
+                        @Html.EditorFor(Model => Model.DataDo, new { htmlAttributes = new { @class = "form-control intro-input utworz", @id = "datepick", @type = "date" } })
+                        <input type="hidden" id="alternate" />
                         @Html.ValidationMessageFor(model => model.DataDo, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -153,30 +97,34 @@
         $("#datepick").click(function () { $("#datepick").datepicker('show'); });
         $("#datepick2").click(function () { $("#datepick2").datepicker('show'); });
     });
-    $(function () {
+    if (!Modernizr.inputtypes.date) {
         $("#datepick").datepicker({
-            buttonText: " < i class='fa fa-calendar' ></i>",
+            buttonText: "Select",
             showOn: "button",
             buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-            format: 'dd-MM-yyyy',
-            changeYear: true,
-            changeMonth: true,
-            yearRange: '-100:+0'
+            dateFormat: 'mm/dd/yy',
+            altFormat: "yy-mm-dd",
+            altField: '#alternate'
         });
-    });
-    $(function () {
-        $("#datepick2").datepicker(
-            {
-                buttonText: "Select",
-                showOn: "button",
-                buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-                format: 'dd-MM-yyyy',
-                changeYear: true,
-                changeMonth: true,
-                yearRange: '-100:+0'
-
-            });
-    });
+    } else {
+        $('#datepick').on('change', function () {
+            $('#alternate').val(this.value);
+        });
+    }
+    if (!Modernizr.inputtypes.date) {
+        $("#datepick2").datepicker({
+            buttonText: "Select",
+            showOn: "button",
+            buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+            dateFormat: 'mm/dd/yy',
+            altFormat: "yy-mm-dd",
+            altField: '#alternate2'
+        });
+    } else {
+        $('#datepick2').on('change', function () {
+            $('#alternate2').val(this.value);
+        });
+    }
 </script>
 
 }

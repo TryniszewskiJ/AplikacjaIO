@@ -64,15 +64,13 @@
           <Property Name="DataOd" Type="datetime" />
           <Property Name="DataDo" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Raporty_Rachunki">
           <Key>
-            <PropertyRef Name="IdRaportu" />
-            <PropertyRef Name="IdRachunku" />
+            <PropertyRef Name="IdRaportyRachunki" />
           </Key>
           <Property Name="IdRaportu" Type="int" Nullable="false" />
           <Property Name="IdRachunku" Type="int" Nullable="false" />
+          <Property Name="IdRaportyRachunki" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <Association Name="FK_Pozycje_Rachunki">
           <End Role="Rachunki" Type="Self.Rachunki" Multiplicity="0..1">
@@ -155,12 +153,7 @@ warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not hav
           <EntitySet Name="Promocja" EntityType="Self.Promocja" Schema="1468_IO" store:Type="Tables" />
           <EntitySet Name="Rachunki" EntityType="Self.Rachunki" Schema="1468_IO" store:Type="Tables" />
           <EntitySet Name="Raporty" EntityType="Self.Raporty" Schema="1468_IO" store:Type="Tables" />
-          <EntitySet Name="Raporty_Rachunki" EntityType="Self.Raporty_Rachunki" store:Type="Tables" store:Schema="1468_IO">
-            <DefiningQuery>SELECT 
-    [Raporty_Rachunki].[IdRaportu] AS [IdRaportu], 
-    [Raporty_Rachunki].[IdRachunku] AS [IdRachunku]
-    FROM [1468_IO].[Raporty_Rachunki] AS [Raporty_Rachunki]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Raporty_Rachunki" EntityType="Self.Raporty_Rachunki" Schema="1468_IO" store:Type="Tables" />
           <AssociationSet Name="FK_Pozycje_Rachunki" Association="Self.FK_Pozycje_Rachunki">
             <End Role="Rachunki" EntitySet="Rachunki" />
             <End Role="PozycjeNaRachunku" EntitySet="PozycjeNaRachunku" />
@@ -208,14 +201,19 @@ warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not hav
             <End Role="Rachunki" EntitySet="Rachunkis" />
             <End Role="PozycjeNaRachunku" EntitySet="PozycjeNaRachunkus" />
           </AssociationSet>
-          <EntitySet Name="Raporties" EntityType="BazaIOModel.Raporty" />
-          <AssociationSet Name="Raporty_Rachunki" Association="BazaIOModel.Raporty_Rachunki">
-            <End Role="Rachunki" EntitySet="Rachunkis" />
-            <End Role="Raporty" EntitySet="Raporties" />
-          </AssociationSet>
           <AssociationSet Name="FK_Rachunki_Promocje" Association="BazaIOModel.FK_Rachunki_Promocje">
             <End Role="Promocja" EntitySet="Promocjas" />
             <End Role="Rachunki" EntitySet="Rachunkis" />
+          </AssociationSet>
+          <EntitySet Name="Raporties" EntityType="BazaIOModel.Raporty" />
+          <EntitySet Name="Raporty_Rachunki" EntityType="BazaIOModel.Raporty_Rachunki" />
+          <AssociationSet Name="pr_Raporty_Rachunki_Rachunki" Association="BazaIOModel.pr_Raporty_Rachunki_Rachunki">
+            <End Role="Rachunki" EntitySet="Rachunkis" />
+            <End Role="Raporty_Rachunki" EntitySet="Raporty_Rachunki" />
+          </AssociationSet>
+          <AssociationSet Name="pr_Raporty_Rachunki_Raporty" Association="BazaIOModel.pr_Raporty_Rachunki_Raporty">
+            <End Role="Raporty" EntitySet="Raporties" />
+            <End Role="Raporty_Rachunki" EntitySet="Raporty_Rachunki" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Kasjer">
@@ -273,9 +271,9 @@ warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not hav
           <Property Name="DataRachunku" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Kasjer" Relationship="BazaIOModel.FK_Rachunki_Kasjer" FromRole="Rachunki" ToRole="Kasjer" />
           <NavigationProperty Name="PozycjeNaRachunkus" Relationship="BazaIOModel.FK_Pozycje_Rachunki" FromRole="Rachunki" ToRole="PozycjeNaRachunku" />
-          <NavigationProperty Name="Raporties" Relationship="BazaIOModel.Raporty_Rachunki" FromRole="Rachunki" ToRole="Raporty" />
           <Property Name="IdPromocji" Type="Int32" />
           <NavigationProperty Name="Promocja" Relationship="BazaIOModel.FK_Rachunki_Promocje" FromRole="Rachunki" ToRole="Promocja" />
+          <NavigationProperty Name="Raporty_Rachunki" Relationship="BazaIOModel.pr_Raporty_Rachunki_Rachunki" FromRole="Rachunki" ToRole="Raporty_Rachunki" />
         </EntityType>
         <Association Name="FK_Rachunki_Kasjer">
           <End Type="BazaIOModel.Kasjer" Role="Kasjer" Multiplicity="0..1" />
@@ -313,20 +311,6 @@ warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Raporty">
-          <Key>
-            <PropertyRef Name="IdRaportu" />
-          </Key>
-          <Property Name="IdRaportu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Suma" Type="Double" />
-          <Property Name="DataOd" Type="DateTime" Precision="3" />
-          <Property Name="DataDo" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Rachunkis" Relationship="BazaIOModel.Raporty_Rachunki" FromRole="Raporty" ToRole="Rachunki" />
-        </EntityType>
-        <Association Name="Raporty_Rachunki">
-          <End Type="BazaIOModel.Rachunki" Role="Rachunki" Multiplicity="*" />
-          <End Type="BazaIOModel.Raporty" Role="Raporty" Multiplicity="*" />
-        </Association>
         <Association Name="FK_Rachunki_Promocje">
           <End Type="BazaIOModel.Promocja" Role="Promocja" Multiplicity="0..1" />
           <End Type="BazaIOModel.Rachunki" Role="Rachunki" Multiplicity="*" />
@@ -336,6 +320,50 @@ warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not hav
             </Principal>
             <Dependent Role="Rachunki">
               <PropertyRef Name="IdPromocji" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Raporty">
+          <Key>
+            <PropertyRef Name="IdRaportu" />
+          </Key>
+          <Property Name="IdRaportu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Suma" Type="Double" />
+          <Property Name="DataOd" Type="DateTime" Precision="3" />
+          <Property Name="DataDo" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Raporty_Rachunki" Relationship="BazaIOModel.pr_Raporty_Rachunki_Raporty" FromRole="Raporty" ToRole="Raporty_Rachunki" />
+        </EntityType>
+        <EntityType Name="Raporty_Rachunki">
+          <Key>
+            <PropertyRef Name="IdRaportyRachunki" />
+          </Key>
+          <Property Name="IdRaportu" Type="Int32" Nullable="false" />
+          <Property Name="IdRachunku" Type="Int32" Nullable="false" />
+          <Property Name="IdRaportyRachunki" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Rachunki" Relationship="BazaIOModel.pr_Raporty_Rachunki_Rachunki" FromRole="Raporty_Rachunki" ToRole="Rachunki" />
+          <NavigationProperty Name="Raporty" Relationship="BazaIOModel.pr_Raporty_Rachunki_Raporty" FromRole="Raporty_Rachunki" ToRole="Raporty" />
+        </EntityType>
+        <Association Name="pr_Raporty_Rachunki_Rachunki">
+          <End Type="BazaIOModel.Rachunki" Role="Rachunki" Multiplicity="1" />
+          <End Type="BazaIOModel.Raporty_Rachunki" Role="Raporty_Rachunki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rachunki">
+              <PropertyRef Name="IdRachunku" />
+            </Principal>
+            <Dependent Role="Raporty_Rachunki">
+              <PropertyRef Name="IdRachunku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pr_Raporty_Rachunki_Raporty">
+          <End Type="BazaIOModel.Raporty" Role="Raporty" Multiplicity="1" />
+          <End Type="BazaIOModel.Raporty_Rachunki" Role="Raporty_Rachunki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Raporty">
+              <PropertyRef Name="IdRaportu" />
+            </Principal>
+            <Dependent Role="Raporty_Rachunki">
+              <PropertyRef Name="IdRaportu" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -410,14 +438,15 @@ warning 6002: The table/view '1468_BazaIO.1468_IO.Raporty_Rachunki' does not hav
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="Raporty_Rachunki" TypeName="BazaIOModel.Raporty_Rachunki" StoreEntitySet="Raporty_Rachunki">
-            <EndProperty Name="Raporty">
-              <ScalarProperty Name="IdRaportu" ColumnName="IdRaportu" />
-            </EndProperty>
-            <EndProperty Name="Rachunki">
-              <ScalarProperty Name="IdRachunku" ColumnName="IdRachunku" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="Raporty_Rachunki">
+            <EntityTypeMapping TypeName="BazaIOModel.Raporty_Rachunki">
+              <MappingFragment StoreEntitySet="Raporty_Rachunki">
+                <ScalarProperty Name="IdRaportyRachunki" ColumnName="IdRaportyRachunki" />
+                <ScalarProperty Name="IdRachunku" ColumnName="IdRachunku" />
+                <ScalarProperty Name="IdRaportu" ColumnName="IdRaportu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
