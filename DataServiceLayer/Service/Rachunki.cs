@@ -84,6 +84,7 @@ namespace DataServiceLayer.Service
                 {
                     var promocje = context.Promocjas.Where(c => c.DataWdrozenia >= DateTime.Now).ToList();
                     List<RachunkiSaveModel> list = new List<RachunkiSaveModel>();
+                    list.Add(new RachunkiSaveModel { NazwaPromocji = "Brak promocji", Rabat = 1 });
                     foreach(var promocja in promocje)
                     {
                         list.Add(new RachunkiSaveModel() { NazwaPromocji = promocja.nazwaPromocji, Rabat = promocja.WysokscRabatu.Value });

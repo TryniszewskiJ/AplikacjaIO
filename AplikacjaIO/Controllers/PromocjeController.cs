@@ -44,7 +44,7 @@ namespace AplikacjaIO.Controllers
             ViewBag.czyEdycja = false;
             var data = Request.Form.GetValues("DataWdrozenia");
             model.IdKierownika = Convert.ToInt32(((ClaimsPrincipal)User).FindFirst(ClaimTypes.NameIdentifier).Value);
-            ViewBag.czyPost = true; 
+             ViewBag.czyPost = true; 
             model = _promocja.Wprowadz(model);
             if(model == null)
             {
